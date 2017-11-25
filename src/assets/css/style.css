@@ -4,7 +4,12 @@ body {
   font-family: sans-serif; }
 
 .App {
-  text-align: center; }
+  color: gold;
+  background-image: url("../images/background.jpg");
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  padding-bottom: 100px; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -28,6 +33,13 @@ body {
   to {
     transform: rotate(360deg); } }
 
+#home {
+  width: 90%;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 1%;
+  background-color: rgba(0, 0, 0, 0.7); }
+
 #home-header {
   display: flex;
   flex-wrap: wrap; }
@@ -35,35 +47,38 @@ body {
 #break {
   margin: 0 10px; }
 
+.list-group-item {
+  background-color: inherit; }
+
+.topic-row {
+  display: flex;
+  border-bottom: 1px solid goldenrod;
+  color: #20c0ff; }
+
+#first-row {
+  color: ivory; }
+
 .thread-icon {
   height: 40px;
   width: 50px; }
-
-li {
-  display: flex;
-  border-bottom: 1px solid goldenrod; }
 
 a {
   color: #20c0ff;
   font-weight: bolder; }
 
-.home-list-color {
-  background-color: inherit; }
-
-#flex-left {
+.flex-left {
   flex: 2; }
 
-#flex-center {
+.flex-center {
   flex: 5; }
 
-#flex-right {
+.flex-right {
   width: 240px;
   font-size: 14px; }
 
 #navbar {
   height: 200px;
-  position: relative;
-  color: gold; }
+  position: relative; }
 
 #navbar-primary {
   height: 100%;

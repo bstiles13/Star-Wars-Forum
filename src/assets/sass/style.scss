@@ -1,3 +1,5 @@
+$customblue: rgb(32, 192, 255);
+
 body {
     margin: 0;
     padding: 0;
@@ -5,7 +7,13 @@ body {
   }
 
 .App {
-  text-align: center;
+  color: gold;
+  // text-align: center;
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-attachment: scroll;
+  background-position: center;
+  padding-bottom: 100px;
 }
 
 .App-logo {
@@ -35,13 +43,35 @@ body {
 
 // Home Component
 
+#home {
+  width: 90%;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 1%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
 #home-header {
   display: flex;
-  flex-wrap: wrap;    
+  flex-wrap: wrap;
 }
 
 #break {
   margin: 0 10px;
+}
+
+.list-group-item {
+  background-color: inherit;
+}
+
+.topic-row {
+  display: flex;
+  border-bottom: 1px solid goldenrod;
+  color: $customblue;
+}
+
+#first-row {
+  color: ivory;
 }
 
 .thread-icon {
@@ -49,30 +79,20 @@ body {
   width: 50px;
 }
 
-li {
-  display: flex;
-  border-bottom: 1px solid goldenrod;
-  // color: white;
-}
-
 a {
   color: rgb(32, 192, 255);
   font-weight: bolder;
 }
 
-.home-list-color {
-  background-color: inherit;
-}
-
-#flex-left {
+.flex-left {
   flex: 2;
 }
 
-#flex-center {
+.flex-center {
   flex: 5;
 }
 
-#flex-right {
+.flex-right {
   width: 240px;
   font-size: 14px;
 }
@@ -82,7 +102,6 @@ a {
 #navbar {
   height: 200px;
   position: relative;
-  color: gold;
 }
 
 #navbar-primary {

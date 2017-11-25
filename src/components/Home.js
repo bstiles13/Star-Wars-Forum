@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import icon from '../assets/images/thread-icon.png'
 
 import { getTopics } from '../actions/getTopicsAction.js';
 
@@ -13,38 +14,38 @@ class Home extends React.Component {
 
     renderTopics() {
         let topics = this.props.topics;
-        if (topics == null) {
-            return <div>Loading</div>
-        } else {
+        if (topics != null) {
             return topics.map(topic => {
                 return (
-                    <li className="list-group-item home-list-color">
-                        <div id="flex-left" className="list-child">
-                            {/* <img src="/assets/images/thread-icon.png" className="thread-icon" /> */}
+                    <li className="list-group-item topic-row">
+                        <div className="list-child flex-left">
+                            <img src={icon} className="thread-icon" />
                         </div>
-                        <div id="flex-center">
-                            {topic.topic}
+                        <div className="list-child flex-center">
+                            {topic.topic.toUpperCase()}
                         </div>
-                        <div id="flex-right" className="list-child"></div>
+                        <div className="list-child flex-right"></div>
                     </li>
                 )
             })
+        } else {
+            return <div>Loading</div>
         }
     }
 
     render() {
         return (
-            <div>
+            <div id="home">
                 <div id="home-header">
                     <h6>Star Wars Fan Community</h6>
                     <h6 id="break">/</h6>
                     <h6>Forum</h6>
                 </div>
                 <ul className="list-group">
-                    <li className="list-group-item home-list-color">
-                        <div id="flex-left" className="list-child"><i className="fa fa-sort" aria-hidden="true"></i></div>
-                        <div id="flex-center">Topic</div>
-                        <div id="flex-right" className="list-child">Last Post</div>
+                    <li className="list-group-item topic-row" id="first-row">
+                        <div className="list-child flex-left"><i className="fa fa-sort" aria-hidden="true"></i></div>
+                        <div className="list-child flex-center">Topic</div>
+                        <div className="list-child flex-right">Last Post</div>
                     </li>
                     {this.renderTopics()}
                 </ul>
