@@ -23,9 +23,7 @@ class Home extends React.Component {
                             <img src={icon} className="thread-icon" />
                         </div>
                         <div className="list-child flex-center">
-                            <Link to={'/topic/' + topic.order}>
-                                {topic.topic.toUpperCase()}
-                            </Link>
+                            <Link to={'/topic/' + topic.order}>{topic.topic.toUpperCase()}</Link>
                         </div>
                         <div className="list-child flex-right"></div>
                     </li>
