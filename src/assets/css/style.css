@@ -27,3 +27,35 @@ body {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
+
+#home-header {
+  display: flex;
+  flex-wrap: wrap; }
+
+#break {
+  margin: 0 10px; }
+
+.thread-icon {
+  height: 40px;
+  width: 50px; }
+
+li {
+  display: flex;
+  border-bottom: 1px solid goldenrod; }
+
+a {
+  color: #20c0ff;
+  font-weight: bolder; }
+
+.home-list-color {
+  background-color: inherit; }
+
+#flex-left {
+  flex: 2; }
+
+#flex-center {
+  flex: 5; }
+
+#flex-right {
+  width: 240px;
+  font-size: 14px; }
