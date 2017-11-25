@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import icon from '../assets/images/thread-icon.png'
@@ -22,7 +23,9 @@ class Home extends React.Component {
                             <img src={icon} className="thread-icon" />
                         </div>
                         <div className="list-child flex-center">
-                            {topic.topic.toUpperCase()}
+                            <Link to={'/topic/' + topic.order}>
+                                {topic.topic.toUpperCase()}
+                            </Link>
                         </div>
                         <div className="list-child flex-right"></div>
                     </li>
