@@ -1,19 +1,25 @@
 {
-  "name": "star-wars-forum",
+  "name": "Star-Wars-Forum",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "express": "^4.16.2",
     "mongoose": "^4.13.5",
+    "npm-run-all": "^4.1.2",
     "react": "^16.1.1",
     "react-dom": "^16.1.1"
   },
   "devDependencies": {
+    "node-sass": "^4.7.2",
     "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-css": "node-sass src/assets/sass/style.scss -o src/assets/css/",
+    "watch-css": "node-sass src/assets/sass/style.scss -o src/assets/css/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
