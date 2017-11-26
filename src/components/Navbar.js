@@ -12,7 +12,7 @@ class Navbar extends React.Component {
                 <div id="navbar-secondary">
                     <div id="nav-links">
                         <a className="nav-item nav-link">Home</a>
-                        <a className="nav-item nav-link">New Thread</a>
+                        <a className="nav-item nav-link">Forums</a>
                         <a className="nav-item nav-link">Sign In</a>
                     </div>
                 </div>
