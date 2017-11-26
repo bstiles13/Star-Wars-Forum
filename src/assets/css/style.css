@@ -40,7 +40,7 @@ html, body {
   to {
     transform: rotate(360deg); } }
 
-#forum, #topic {
+#home, #forum, #topic {
   width: 90%;
   margin: 30px auto;
   padding: 30px;
@@ -126,7 +126,8 @@ a:not([href]) {
   color: gold; }
 
 .nav-link:hover {
-  color: white; }
+  color: white;
+  background-color: #6e6161; }
 
 a:not([href]):hover {
   color: white;

@@ -51,13 +51,16 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-#forum, #topic {
+#home, #forum, #topic {
   width: 90%;
   margin: 30px auto;
   padding: 30px;
   border-radius: 1%;
   background-color: $customblack;
 }
+
+// Home Component
+
 
 // Forum Component
 
@@ -162,6 +165,7 @@ a:not([href]) {
 
 .nav-link:hover {
   color: white;
+  background-color: rgb(110, 97, 97);
 }
 
 a:not([href]):hover {
