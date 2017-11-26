@@ -40,14 +40,14 @@ html, body {
   to {
     transform: rotate(360deg); } }
 
-#home, #topic {
+#forum, #topic {
   width: 90%;
   margin: 30px auto;
   padding: 30px;
   border-radius: 1%;
   background-color: rgba(0, 0, 0, 0.7); }
 
-#home-header {
+#forum-header {
   display: flex;
   flex-wrap: wrap; }
 

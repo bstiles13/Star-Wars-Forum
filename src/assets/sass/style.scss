@@ -51,9 +51,7 @@ html, body {
   to { transform: rotate(360deg); }
 }
 
-// Home Component
-
-#home, #topic {
+#forum, #topic {
   width: 90%;
   margin: 30px auto;
   padding: 30px;
@@ -61,7 +59,9 @@ html, body {
   background-color: $customblack;
 }
 
-#home-header {
+// Forum Component
+
+#forum-header {
   display: flex;
   flex-wrap: wrap;
 }

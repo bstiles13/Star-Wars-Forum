@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 
 class Navbar extends React.Component {
@@ -11,9 +12,9 @@ class Navbar extends React.Component {
                 </div>
                 <div id="navbar-secondary">
                     <div id="nav-links">
-                        <a className="nav-item nav-link">Home</a>
-                        <a className="nav-item nav-link">Forums</a>
-                        <a className="nav-item nav-link">Sign In</a>
+                        <Link to={'/'} className="nav-item nav-link">Home</Link>
+                        <Link to={'/forum'} className="nav-item nav-link">Forums</Link>
+                        <Link to={'/login'} className="nav-item nav-link">Sign In</Link>
                     </div>
                 </div>
                 <img id="logo" src={logo} />
