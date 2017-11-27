@@ -16,9 +16,9 @@ class Forum extends React.Component {
     renderTopics() {
         let topics = this.props.topics;
         if (topics != null) {
-            return topics.map(topic => {
+            return topics.map((topic, index) => {
                 return (
-                    <li className="list-group-item topic-row">
+                    <li className="list-group-item topic-row" key={index}>
                         <div className="list-child flex-left">
                             <img src={icon} className="thread-icon" />
                         </div>

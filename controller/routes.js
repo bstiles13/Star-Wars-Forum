@@ -14,6 +14,22 @@ router.get('/topics', (req, res) => {
     })
 });
 
+router.get('/threads/:id', (req, res) => {
+    console.log(req.params.id);
+    Thread.find({}).then(data => {
+
+    })
+})
+
+router.post('/topicid', (req, res) => {
+    console.log(req.body.id)
+    Topic.findOne({order: req.body.id}).then(data => {
+        res.json(data);
+    }).catch(err => {
+        throw err;
+    })
+})
+
 router.get('/articles', (req, res) => {
     let date = moment().subtract(40, 'days').format('YYYYMMDD');
     // let date = prevMonth.substring(0,5) + prevMonth.substring(6, 8)
@@ -23,6 +39,17 @@ router.get('/articles', (req, res) => {
     axios.get(query).then(data => {
         // console.log('data', data.data);
         res.json(data.data.response);
+    })
+})
+
+router.post('/newthread', (req, res) => {
+    let newThread = req.body;
+    newThread.user = "Anonymous";    
+    console.log(newThread);
+    Thread.create(newThread).then(data => {
+        res.send(true);
+    }).catch(err => {
+        console.log(err);
     })
 })
 
