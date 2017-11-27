@@ -1,14 +1,20 @@
 import React from 'react';
+import { Timeline } from 'react-twitter-widgets'
 
 class Tweets extends React.Component {
     render() {
         return (
             <div id="tweets">
-                <a class="twitter-timeline"
-                    href="https://twitter.com/starwars"
-                    data-height="700">
-                    Tweets by @starwars
-                </a>
+                <Timeline
+                    dataSource={{
+                        sourceType: 'profile',
+                        screenName: 'starwars'
+                    }}
+                    options={{
+                        username: 'starwars',
+                        height: '600'
+                    }}
+                />
             </div>
         )
     }

@@ -49,14 +49,16 @@ html, body {
 
 #home {
   width: 90%;
-  margin: 0 auto; }
+  margin: 20px auto; }
 
 #news-container {
   display: flex; }
 
 #news-header {
+  padding: 15px 0;
   margin-bottom: 0;
-  background-color: black; }
+  background-color: black;
+  text-align: center; }
 
 #tweets {
   flex: 1; }
@@ -65,7 +67,7 @@ html, body {
   flex: 2; }
 
 #article-carousel {
-  height: 500px; }
+  height: 600px; }
 
 .carousel-inner, .carousel-item {
   height: 100%;
@@ -73,7 +75,8 @@ html, body {
 
 .carousel-image {
   margin: 0 auto;
-  height: 100%; }
+  height: 100%;
+  max-width: 100%; }
 
 .carousel-caption {
   color: gold;

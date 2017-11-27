@@ -4,10 +4,14 @@ import Tweets from './Tweets';
 
 class Home extends React.Component {
 
+    componentDidMount() {
+        console.log('test');
+    }
+
     render() {
         return (
             <div id="home">
-                <h3 id="news-header">Featured News</h3>
+                <h5 id="news-header">Featured News</h5>
                 <div id="news-container">
                     <Articles />
                     <Tweets />

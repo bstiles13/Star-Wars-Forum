@@ -63,7 +63,7 @@ html, body {
 
 #home {
   width: 90%;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 #news-container {
@@ -71,8 +71,10 @@ html, body {
 }
 
 #news-header {
+  padding: 15px 0;
   margin-bottom: 0;
   background-color: black;
+  text-align: center;
 }
 
 // Tweets Component
@@ -88,7 +90,7 @@ html, body {
 }
 
 #article-carousel {
-  height: 500px;
+  height: 600px;
 }
 
 .carousel-inner, .carousel-item {
@@ -99,6 +101,7 @@ html, body {
 .carousel-image {
   margin: 0 auto;
   height: 100%;
+  max-width: 100%;
 }
 
 .carousel-caption {
