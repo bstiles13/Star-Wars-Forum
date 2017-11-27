@@ -6,7 +6,7 @@ let threadSchema = new Schema({
     poster: String,
     title: String,
     message: String,
-    topic_id: Number,    
+    topic_id: String,    
     time_posted: {
         type: Date,
         default: Date.now

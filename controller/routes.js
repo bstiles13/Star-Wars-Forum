@@ -4,6 +4,7 @@ let path = require('path');
 let axios = require('axios');
 let moment = require('moment');
 let Topic = require('../model/topic.js');
+let Thread = require('../model/thread.js');
 
 // Sends topics to homepage for display
 router.get('/topics', (req, res) => {
@@ -15,9 +16,13 @@ router.get('/topics', (req, res) => {
 });
 
 router.get('/threads/:id', (req, res) => {
-    console.log(req.params.id);
-    Thread.find({}).then(data => {
-
+    console.log('test', req.params.id);
+    Topic.findOne({order: req.params.id}).then(data => {
+        Thread.find({topic_id: data._id}).then(data => {
+            res.json(data);
+        }).catch(err => {
+            throw err;
+        })
     })
 })
 
@@ -44,9 +49,10 @@ router.get('/articles', (req, res) => {
 
 router.post('/newthread', (req, res) => {
     let newThread = req.body;
-    newThread.user = "Anonymous";    
+    newThread.poster = "Anonymous";    
     console.log(newThread);
     Thread.create(newThread).then(data => {
+        console.log('new thread success');
         res.send(true);
     }).catch(err => {
         console.log(err);
