@@ -48,23 +48,26 @@ html, body {
   background-color: rgba(0, 0, 0, 0.7); }
 
 #home {
-  width: 60%;
+  width: 90%;
   margin: 0 auto; }
 
 #news {
-  width: 100%; }
+  width: 70%; }
 
 #news-header {
-  width: 100%;
   margin-bottom: 0;
   background-color: black; }
 
-.carousel-inner {
+#article-carousel {
+  height: 500px; }
+
+.carousel-inner, .carousel-item {
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7); }
 
 .carousel-image {
-  height: 500px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  height: 100%; }
 
 .carousel-caption {
   color: gold;
