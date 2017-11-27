@@ -5,6 +5,7 @@ import Home from './Home';
 import Forum from './Forum';
 import Topic from './Topic';
 import Thread from './Thread';
+import NewThread from './NewThread';
 
 
 class App extends React.Component {
@@ -18,6 +19,7 @@ class App extends React.Component {
           <Route path="/forum" render={props => <Forum />} />
           <Route path="/topic/:id" render={props => <Topic {...props} />} />
           <Route path="/thread/:topicid/:threadid" render={props => <Thread {...props} />} />
+          <Route path="/newthread/:id" render={props => <NewThread {...props} />} />
         </div>
       </BrowserRouter>
     );

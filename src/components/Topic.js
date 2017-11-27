@@ -11,6 +11,7 @@ class Topic extends React.Component {
         return (
             <div id="topic">
                 {"Topic: " + this.props.match.params.id}
+                <Link to={'/newthread/' + this.props.match.params.id}>New Thread</Link>
                 <Link to={'/thread/' + this.props.match.params.id + '/1' }>Test</Link>
                 <br />
                 <table className="table table-hover">
