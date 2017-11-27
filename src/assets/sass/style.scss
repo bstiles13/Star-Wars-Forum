@@ -66,15 +66,25 @@ html, body {
   margin: 0 auto;
 }
 
-// News Component
-
-#news {
-  width: 70%;
+#news-container {
+  display: flex;
 }
 
 #news-header {
   margin-bottom: 0;
   background-color: black;
+}
+
+// Tweets Component
+
+#tweets {
+  flex: 1
+}
+
+// News Component
+
+#articles {
+  flex: 2;
 }
 
 #article-carousel {

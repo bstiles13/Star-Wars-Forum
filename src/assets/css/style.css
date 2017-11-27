@@ -51,12 +51,18 @@ html, body {
   width: 90%;
   margin: 0 auto; }
 
-#news {
-  width: 70%; }
+#news-container {
+  display: flex; }
 
 #news-header {
   margin-bottom: 0;
   background-color: black; }
+
+#tweets {
+  flex: 1; }
+
+#articles {
+  flex: 2; }
 
 #article-carousel {
   height: 500px; }

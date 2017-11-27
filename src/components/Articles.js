@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { getArticles } from '../actions/getArticlesAction.js';
 import Loader from './Loader';
 
-class News extends React.Component {
+class Articles extends React.Component {
 
     componentDidMount() {
         this.props.getArticles();
@@ -42,8 +42,7 @@ class News extends React.Component {
 
     render() {
         return (
-            <div id="news">
-                <h3 id="news-header">Featured News</h3>
+            <div id="articles">
                 {
                     this.props.articles != null
                         ? (
@@ -90,4 +89,4 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({ getArticles: getArticles }, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(News);
+export default connect(mapStateToProps, matchDispatchToProps)(Articles);
