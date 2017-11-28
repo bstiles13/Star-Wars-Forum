@@ -17,8 +17,8 @@ class Topic extends React.Component {
         if (threads != null) {
             return threads.map((thread, index) => {
                 return (
-                    <tr>
-                        <td>{thread.title}</td>
+                    <tr key={index}>
+                        <td><Link to={'/thread/' + this.props.match.params.id + '/' + thread._id}>{thread.title}</Link></td>
                         <td>{thread.poster}</td>
                         <td>{thread.time_posted.substring(0, 10)}</td>
                         <td>Placeholder</td>
@@ -29,7 +29,6 @@ class Topic extends React.Component {
         } else {
             return <tr><td>No threads</td></tr>
         }
-
     }
 
     render() {

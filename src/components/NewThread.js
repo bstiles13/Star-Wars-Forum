@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { handleNewThread } from '../actions/handleNewThread.js';
+import { handleNewThreadInput, handleNewThreadId } from '../actions/handleNewThreadAction.js';
 
 class NewThread extends React.Component {
 
@@ -14,12 +14,13 @@ class NewThread extends React.Component {
     }
 
     componentDidMount() {
-        this.props.handleNewThread(null, this.props.match.params.id);
+        this.props.handleNewThreadId(this.props.match.params.id);
     }
 
     submitThread() {
         axios.post('/newthread', this.props.newThread).then(data => {
-            console.log(data);
+            console.log('new thread success', data);
+            this.props.history.push('/thread/' + this.props.match.params.id + '/' + data.data._id);          
         })
     }
 
@@ -29,17 +30,17 @@ class NewThread extends React.Component {
                 <form>
                     <div className="form-group">
                         <label htmlFor="form-topic">Topic</label>
-                        <select className="form-control" id="form-topic" name="topic_id" onChange={this.props.handleNewThread}>
+                        <select className="form-control" id="form-topic" name="topic_id" onChange={this.props.handleNewThreadInput}>
                             {this.renderOptions()}
                         </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="form-title">Title</label>
-                        <input type="text" className="form-control" id="form-title" placeholder="Title" name="title" onChange={this.props.handleNewThread} />
+                        <input type="text" className="form-control" id="form-title" placeholder="Title" name="title" onChange={this.props.handleNewThreadInput} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="form-post">Message</label>
-                        <textarea type="text" className="form-control" id="form-post" placeholder="Share what's on your mind" name="message" onChange={this.props.handleNewThread}></textarea>
+                        <textarea type="text" className="form-control" id="form-post" placeholder="Share what's on your mind" name="message" onChange={this.props.handleNewThreadInput}></textarea>
                     </div>
                 </form>
                 <button type="submit" className="btn btn-outline-primary" onClick={this.submitThread.bind(this)}>Submit</button>
@@ -57,7 +58,8 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        handleNewThread: handleNewThread
+        handleNewThreadInput: handleNewThreadInput,
+        handleNewThreadId: handleNewThreadId
     }, dispatch)
 }
 

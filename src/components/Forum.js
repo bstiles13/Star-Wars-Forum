@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -25,7 +26,7 @@ class Forum extends React.Component {
                         <div className="list-child flex-center">
                             <Link to={'/topic/' + topic.order}>{topic.topic.toUpperCase()}</Link>
                         </div>
-                        <div className="list-child flex-right"></div>
+                        <div className="list-child flex-right">Placeholder</div>
                     </li>
                 )
             })

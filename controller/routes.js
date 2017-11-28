@@ -5,6 +5,7 @@ let axios = require('axios');
 let moment = require('moment');
 let Topic = require('../model/topic.js');
 let Thread = require('../model/thread.js');
+let Reply = require('../model/reply.js');
 
 // Sends topics to homepage for display
 router.get('/topics', (req, res) => {
@@ -17,8 +18,8 @@ router.get('/topics', (req, res) => {
 
 router.get('/threads/:id', (req, res) => {
     console.log('test', req.params.id);
-    Topic.findOne({order: req.params.id}).then(data => {
-        Thread.find({topic_id: data._id}).then(data => {
+    Topic.findOne({ order: req.params.id }).then(data => {
+        Thread.find({ topic_id: data._id }).then(data => {
             res.json(data);
         }).catch(err => {
             throw err;
@@ -26,9 +27,26 @@ router.get('/threads/:id', (req, res) => {
     })
 })
 
+router.get('/replies/:id', (req, res) => {
+    console.log('test', req.params.id);
+    Reply.find({ thread_id: req.params.id }).then(data => {
+        console.log('replies complete');
+        res.json(data);
+    }).catch(err => {
+        throw err;
+    })
+})
+
+router.get('/thread/:id', function (req, res) {
+    var id = req.params.id;
+    Thread.findOne({ _id: id }).then(data => {
+        res.json(data);
+    })
+})
+
 router.post('/topicid', (req, res) => {
     console.log(req.body.id)
-    Topic.findOne({order: req.body.id}).then(data => {
+    Topic.findOne({ order: req.body.id }).then(data => {
         res.json(data);
     }).catch(err => {
         throw err;
@@ -49,13 +67,31 @@ router.get('/articles', (req, res) => {
 
 router.post('/newthread', (req, res) => {
     let newThread = req.body;
-    newThread.poster = "Anonymous";    
+    newThread.poster = "Anonymous";
     console.log(newThread);
     Thread.create(newThread).then(data => {
         console.log('new thread success');
+        res.json(data);
+    }).catch(err => {
+        console.log(err);
+    })
+})
+
+router.post('/newreply', (req, res) => {
+    let newReply = req.body;
+    newReply.poster = "Anonymous";
+    console.log(newReply);
+    Reply.create(newReply).then(data => {
+        console.log('new reply success');
         res.send(true);
     }).catch(err => {
         console.log(err);
+    })
+})
+
+router.get('/lastpost/:id', (req, res) => {
+    Reply.findOne({ topic_id: req.params.id }).then(data => {
+        res.json(data);
     })
 })
 

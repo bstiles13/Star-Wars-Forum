@@ -40,7 +40,7 @@ html, body {
   to {
     transform: rotate(360deg); } }
 
-#forum, #topic {
+#forum, #topic, #thread {
   width: 90%;
   margin: 30px auto;
   padding: 30px;
@@ -139,6 +139,104 @@ a {
   margin: 20px auto;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 20px; }
+
+#thread-header {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px; }
+
+#thread-header > a {
+  color: gold; }
+
+#break {
+  margin: 0 10px; }
+
+#thread {
+  color: black; }
+
+#new-reply-container {
+  padding: 10px 100px;
+  /* background-color: ivory; */
+  border-radius: 2%; }
+
+#signature {
+  padding-left: 10px;
+  color: ivory; }
+
+.label {
+  color: gold; }
+
+.warning {
+  color: rgba(221, 0, 44, 0.473); }
+
+.reply {
+  margin-bottom: 10px; }
+
+.reply-header {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  padding: 0 10px; }
+
+.reply-container {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid lightgray;
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  padding: 10px 20px; }
+
+.reply-signature {
+  flex: 1;
+  border-right: 1px solid dimgray;
+  padding-right: 10px; }
+
+.reply-body {
+  padding: 10px 0 20px 20px;
+  flex: 7; }
+
+#reply-title {
+  font-weight: bold; }
+
+.reply-message {
+  white-space: pre-wrap; }
+
+.reply-options {
+  flex: 1;
+  padding: 10px 0 0 20px; }
+
+.avatar {
+  width: 70px;
+  height: auto; }
+
+.fa-trash {
+  color: red;
+  font-size: 20px; }
+
+.fa-trash:hover {
+  cursor: pointer; }
+
+.quote {
+  color: black;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 0.1px solid gainsboro;
+  border-bottom: 0.1px solid gainsboro;
+  margin-bottom: 10px;
+  padding: 5px; }
+
+.quote-poster {
+  font-weight: bold; }
+
+.quote-body {
+  font-style: italic;
+  overflow: auto; }
+
+.option-icon {
+  margin: 5px;
+  cursor: pointer;
+  font-size: 30px; }
 
 #navbar {
   height: 200px;
