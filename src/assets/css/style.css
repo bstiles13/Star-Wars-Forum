@@ -314,3 +314,32 @@ a:not([href]):hover {
 .break {
   color: gold;
   margin: 0 10px; }
+
+#login {
+  text-align: center;
+  width: 90%;
+  margin: 30px auto;
+  padding: 20px 30px 50px 30px;
+  background-color: rgba(0, 0, 0, 0.7); }
+
+#user-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border-bottom: 1px solid #20c0ff;
+  padding-bottom: 30px;
+  margin-bottom: 30px; }
+
+.login-input {
+  width: 200px; }
+
+.login-label {
+  display: none; }
+
+.warning {
+  color: red;
+  font-weight: bold;
+  margin-bottom: 10px; }
+
+.custom-color {
+  color: ivory; }

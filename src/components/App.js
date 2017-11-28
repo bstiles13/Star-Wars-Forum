@@ -6,7 +6,7 @@ import Forum from './Forum';
 import Topic from './Topic';
 import Thread from './Thread';
 import NewThread from './NewThread';
-
+import Login from './Login';
 
 class App extends React.Component {
 
@@ -20,6 +20,7 @@ class App extends React.Component {
           <Route path="/topic/:id" render={props => <Topic {...props} />} />
           <Route path="/thread/:topicid/:threadid" render={props => <Thread {...props} />} />
           <Route path="/newthread/:id" render={props => <NewThread {...props} />} />
+          <Route path="/login" render={props => <Login />} />
         </div>
       </BrowserRouter>
     );
