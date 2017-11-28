@@ -9,7 +9,17 @@ let Reply = require('../model/reply.js');
 
 // Sends topics to homepage for display
 router.get('/topics', (req, res) => {
-    Topic.find({}).then(data => {
+    Topic.aggregate([
+        {
+          $lookup:
+            {
+              from: "replies",
+              localField: "_id",
+              foreignField: "topic_id",
+              as: "history"
+            }
+       }
+    ]).then(data => {
         res.json(data);
     }).catch(err => {
         throw err;
@@ -44,9 +54,8 @@ router.get('/thread/:id', function (req, res) {
     })
 })
 
-router.post('/topicid', (req, res) => {
-    console.log(req.body.id)
-    Topic.findOne({ order: req.body.id }).then(data => {
+router.get('/topicdetail/:id', (req, res) => {
+    Topic.findOne({ order: req.params.id }).then(data => {
         res.json(data);
     }).catch(err => {
         throw err;

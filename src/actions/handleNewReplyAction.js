@@ -1,25 +1,12 @@
 import axios from 'axios';
 
-export const handleNewReplyInput = (event) => {
+export const handleNewReply = (event, topicId, threadId) => {
     return {
         type: "HANDLE_NEW_REPLY",
         payload: {
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            topic_id: topicId,
+            thread_id: threadId
         }
-    }
-}
-
-export const handleNewReplyIds = (topicId, threadId) => {
-    return function (dispatch) {
-        axios.post('/topicid', { id: topicId }).then(data => {
-            console.log(data);
-            dispatch({
-                type: "HANDLE_NEW_REPLY",
-                payload: {
-                    topic_id: data.data._id,
-                    thread_id: threadId
-                }
-            })
-        })
     }
 }

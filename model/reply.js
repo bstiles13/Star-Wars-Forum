@@ -5,8 +5,12 @@ let Schema = mongoose.Schema;
 let replySchema = new Schema({
     poster: String,
     message: String,
-    thread_id: String,
-    topic_id: String,    
+    thread_id: {
+        type: mongoose.Schema.ObjectId
+    },
+    topic_id: {
+        type: mongoose.Schema.ObjectId
+    },  
     time_posted: {
         type: Date,
         default: Date.now

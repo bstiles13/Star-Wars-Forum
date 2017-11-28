@@ -6,6 +6,7 @@ import getOneThreadReducer from './getOneThreadReducer.js';
 import handleNewThreadReducer from './handleNewThreadReducer.js';
 import handleNewReplyReducer from './handleNewReplyReducer.js';
 import getRepliesReducer from './getRepliesReducer.js';
+import toggleTopicReducer from './toggleTopicReducer.js';
 
 let reducers = combineReducers({
     articles: getArticlesReducer,
@@ -14,7 +15,8 @@ let reducers = combineReducers({
     oneThread: getOneThreadReducer,
     newThread: handleNewThreadReducer,
     newReply: handleNewReplyReducer,
-    replies: getRepliesReducer
+    replies: getRepliesReducer,
+    toggledTopic: toggleTopicReducer
 })
 
 export default reducers;

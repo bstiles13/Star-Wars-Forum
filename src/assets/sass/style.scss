@@ -125,15 +125,10 @@ html, body {
   100% { transform: rotate(360deg); }
 }
 
-// Forum Component
+// Topic Component
 
-#forum-header {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#break {
-  margin: 0 10px;
+#topic {
+  overflow: scroll;
 }
 
 .list-group-item {
@@ -374,4 +369,26 @@ a:not([href]):hover {
   width: 280px;
   left: 50%;
   margin-left: -140px;
+}
+
+// Breadcrumb
+
+#breadcrumb {
+  display: flex;
+  color: gold;
+  margin-bottom: 15px;
+}
+
+.breadcrumb-link {
+  color: gold;
+}
+
+.breadcrumb-static {
+  color: ivory;
+  font-weight: bold;
+}
+
+.break {
+  color: gold;
+  margin: 0 10px;
 }

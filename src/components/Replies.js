@@ -4,14 +4,15 @@ import { Link } from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReplies } from '../actions/getRepliesAction.js';
-import { handleNewReplyInput, handleNewReplyIds } from '../actions/handleNewReplyAction.js';
+import { handleNewReply } from '../actions/handleNewReplyAction.js';
+import { toggleTopic } from '../actions/toggleTopicAction';
 
 class Replies extends React.Component {
 
     componentDidMount() {
         console.log(this.props.match);
         this.props.getReplies(this.props.threadId);
-        this.props.handleNewReplyIds(this.props.topicId, this.props.threadId);                
+        this.props.toggleTopic(this.props.topicId);
     }
 
     renderReplies() {
@@ -60,7 +61,7 @@ class Replies extends React.Component {
                     <div className="form-group">
                         <label className="label" htmlFor="threadPost">Quick Reply:</label>
                         <textarea type="text" className="form-control" id="threadPost"
-                            placeholder="Share what's on your mind" name="message" onChange={this.props.handleNewReplyInput}></textarea>
+                            placeholder="Share what's on your mind" name="message" onChange={(event) => this.props.handleNewReply(event, this.props.toggledTopic._id, this.props.threadId )}></textarea>
                     </div>
                     <button type="submit" className="btn btn-outline-danger" onClick={this.submitReply.bind(this)}>Reply</button>
                     <span id='signature'> poster </span>
@@ -73,15 +74,16 @@ class Replies extends React.Component {
 function mapStateToProps(state) {
     return {
         replies: state.replies,
-        newReply: state.newReply        
+        newReply: state.newReply,
+        toggledTopic: state.toggledTopic
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getReplies: getReplies,
-        handleNewReplyInput: handleNewReplyInput,
-        handleNewReplyIds: handleNewReplyIds
+        handleNewReply: handleNewReply,
+        toggleTopic: toggleTopic
     }, dispatch)
 }
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import icon from '../assets/images/thread-icon.png'
+import Breadcrumb from './Breadcrumb';
 
 import { getTopics } from '../actions/getTopicsAction.js';
 
@@ -18,15 +19,27 @@ class Forum extends React.Component {
         let topics = this.props.topics;
         if (topics != null) {
             return topics.map((topic, index) => {
+                let lastPost = topic.history.length > 0 ? topic.history[topic.history.length - 1] : false;
                 return (
                     <li className="list-group-item topic-row" key={index}>
                         <div className="list-child flex-left">
                             <img src={icon} className="thread-icon" />
                         </div>
                         <div className="list-child flex-center">
-                            <Link to={'/topic/' + topic.order}>{topic.topic.toUpperCase()}</Link>
+                            <Link to={'/topic/' + topic.order} onClick={() => console.log('clicked route')}>{topic.topic.toUpperCase()}</Link>
                         </div>
-                        <div className="list-child flex-right">Placeholder</div>
+                        <div className="list-child flex-right">
+                            {
+                                topic.history.length > 0
+                                    ? (
+                                        <div>
+                                            <Link to={'/thread/' + topic.order + '/' + lastPost.thread_id }>{lastPost.message.substring(0, 20) + "..."}</Link>
+                                            <div>by {lastPost.poster} on {lastPost.time_posted.substring(0, 10)} </div>
+                                        </div>
+                                    )
+                                    : <div>No posts</div>
+                            }
+                        </div>
                     </li>
                 )
             })
@@ -38,11 +51,7 @@ class Forum extends React.Component {
     render() {
         return (
             <div id="forum">
-                <div id="forum-header">
-                    <h6>Star Wars Fan Community</h6>
-                    <h6 id="break">/</h6>
-                    <h6>Forum</h6>
-                </div>
+                <Breadcrumb />
                 <ul className="list-group">
                     <li className="list-group-item topic-row" id="first-row">
                         <div className="list-child flex-left"><i className="fa fa-sort" aria-hidden="true"></i></div>
@@ -64,7 +73,9 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-    return bindActionCreators({ getTopics: getTopics }, dispatch)
+    return bindActionCreators({
+        getTopics: getTopics
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(Forum);

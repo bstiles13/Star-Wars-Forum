@@ -6,7 +6,9 @@ let threadSchema = new Schema({
     poster: String,
     title: String,
     message: String,
-    topic_id: String,    
+    topic_id: {
+        type: mongoose.Schema.ObjectId
+    },    
     time_posted: {
         type: Date,
         default: Date.now

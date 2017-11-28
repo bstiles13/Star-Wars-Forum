@@ -3,12 +3,15 @@ import { Link } from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getOneThread } from '../actions/getOneThreadAction.js';
+import { toggleTopic } from '../actions/toggleTopicAction.js';
 import Replies from './Replies';
+import Breadcrumb from './Breadcrumb';
 
 class Thread extends React.Component {
 
     componentDidMount() {
         console.log(this.props.match);
+        this.props.toggleTopic(this.props.match.params.topicid);        
         this.props.getOneThread(this.props.match.params.threadid);
     }
 
@@ -21,6 +24,7 @@ class Thread extends React.Component {
                 {this.props.oneThread != null
                     ? (
                         <div id="thread">
+                            <Breadcrumb topic={this.props.toggledTopic} thread={this.props.oneThread.title}/>
                             <div className="reply">
                                 <div className="reply-header">Thread</div>
                                 <div className="reply-container">
@@ -53,13 +57,15 @@ class Thread extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        oneThread: state.oneThread
+        oneThread: state.oneThread,
+        toggledTopic: state.toggledTopic
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        getOneThread: getOneThread
+        getOneThread: getOneThread,
+        toggleTopic: toggleTopic
     }, dispatch)
 }
 
