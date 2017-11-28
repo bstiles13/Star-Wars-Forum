@@ -23,7 +23,7 @@ class Topic extends React.Component {
                         <td><Link to={'/thread/' + this.props.match.params.id + '/' + thread._id}>{thread.title}</Link></td>
                         <td>{thread.poster}</td>
                         <td>{thread.time_posted.substring(0, 10)}</td>
-                        <td>Placeholder</td>
+                        <td>{thread.history.length}</td>
                         <td>Placeholder</td>
                     </tr>
                 )

@@ -37,7 +37,20 @@ router.get('/topics', (req, res) => {
 
 router.get('/threads/:id?', (req, res) => {
     Topic.findOne({ order: req.params.id }).then(data => {
-        Thread.find({ topic_id: data._id }).then(data => {
+        Thread.aggregate([
+            {
+                $match: { topic_id: data._id }
+            },
+            {
+                $lookup:
+                    {
+                        from: "replies",
+                        localField: "_id",
+                        foreignField: "thread_id",
+                        as: "history"
+                    }
+            }
+        ]).then(data => {
             res.json(data);
         }).catch(err => {
             throw err;
