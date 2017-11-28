@@ -12,6 +12,12 @@ export const handleNewReply = (event, topicId, threadId) => {
 }
 
 export const handleNewQuote = (poster, message) => {
+    let test = message.split("<br/>");
+    if (test.length > 1) {
+      message = test[1];
+    } else {
+      message = test[0];
+    }
     return {
         type: "HANDLE_NEW_REPLY",
         payload: {
