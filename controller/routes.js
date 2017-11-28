@@ -16,7 +16,16 @@ router.get('/topics', (req, res) => {
                     from: "replies",
                     localField: "_id",
                     foreignField: "topic_id",
-                    as: "history"
+                    as: "replyHistory"
+                }
+        },
+        {
+            $lookup:
+                {
+                    from: "threads",
+                    localField: "_id",
+                    foreignField: "topic_id",
+                    as: "threadHistory"
                 }
         }
     ]).then(data => {
@@ -27,22 +36,13 @@ router.get('/topics', (req, res) => {
 });
 
 router.get('/threads/:id?', (req, res) => {
-    if (req.params.id) {
-        Topic.findOne({ order: req.params.id }).then(data => {
-            Thread.find({ topic_id: data._id }).then(data => {
-                res.json(data);
-            }).catch(err => {
-                throw err;
-            })
-        })
-    } else {
-        Thread.find({}).then(data => {
+    Topic.findOne({ order: req.params.id }).then(data => {
+        Thread.find({ topic_id: data._id }).then(data => {
             res.json(data);
-        }).catch(err =>{
+        }).catch(err => {
             throw err;
         })
-    }
-
+    })
 })
 
 router.get('/replies/:id', (req, res) => {

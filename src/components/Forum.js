@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import icon from '../assets/images/thread-icon.png'
 import Breadcrumb from './Breadcrumb';
-import LastPost from './LastPost';
-import { getThreads } from '../actions/getThreadsAction.js';
 import { getTopics } from '../actions/getTopicsAction.js';
 
 
@@ -14,21 +12,12 @@ class Forum extends React.Component {
 
     componentDidMount() {
         this.props.getTopics();
-        this.props.getThreads();
-    }
-
-    renderLastThread(threadId) {
-        console.log('threads', this.props.threads);
-        console.log('thread id', threadId);
-        let lastThread = this.props.threads.find(o => o._id == threadId).title;
-        return lastThread;
     }
 
     renderTopics() {
         let topics = this.props.topics;
         if (topics != null) {
             return topics.map((topic, index) => {
-                let lastPost = topic.history.length > 0 ? topic.history[topic.history.length - 1] : false;
                 return (
                     <li className="list-group-item topic-row" key={index}>
                         <div className="list-child flex-left">
@@ -39,13 +28,12 @@ class Forum extends React.Component {
                         </div>
                         <div className="list-child flex-right">
                             {
-                                topic.history.length > 0 && this.props.threads
+                                topic.replyHistory.length > 0
                                     ? (
-                                        <LastPost 
-                                            topic={topic}
-                                            threads={this.props.threads}
-                                            lastPost={lastPost}
-                                        />
+                                        <div>
+                                            <div><Link to={'/thread/' + topic.order + '/' + topic.recent.thread_id}>{topic.recent.title}</Link></div>
+                                            <div>by {topic.recent.poster} on {topic.recent.time.substring(0, 10)} </div>
+                                        </div>
                                     )
                                     : <div>No posts</div>
                             }
@@ -78,15 +66,13 @@ class Forum extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        topics: state.topics,
-        threads: state.threads
+        topics: state.topics
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        getTopics: getTopics,
-        getThreads: getThreads        
+        getTopics: getTopics
     }, dispatch)
 }
 
