@@ -36,10 +36,9 @@ class Topic extends React.Component {
     render() {
         return (
             <div id="topic">
-                {"Topic: " + this.props.match.params.id}
+                {/* {"Topic: " + this.props.match.params.id} */}
                 <Breadcrumb topic={this.props.toggledTopic}/>
-                <Link to={'/newthread/' + this.props.match.params.id}>New Thread</Link>
-                <Link to={'/thread/' + this.props.match.params.id + '/1'}>Test</Link>
+                <button type="button" id="new-thread-button" className="btn btn-danger btn-sm"><Link to={'/newthread/' + this.props.match.params.id} id="new-thread-link">New Thread</Link></button>
                 <br />
                 <table className="table table-hover">
                     <thead>

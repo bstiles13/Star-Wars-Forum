@@ -3,16 +3,23 @@ import { Link } from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getOneThread } from '../actions/getOneThreadAction.js';
+import { getReplies } from '../actions/getRepliesAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
+import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
 import Replies from './Replies';
 import Breadcrumb from './Breadcrumb';
+import ModalQuote from './ModalQuote';
 
 class Thread extends React.Component {
 
     componentDidMount() {
         console.log(this.props.match);
-        this.props.toggleTopic(this.props.match.params.topicid);        
+        this.props.toggleTopic(this.props.match.params.topicid);
         this.props.getOneThread(this.props.match.params.threadid);
+    }
+
+    createMarkup(html) {
+        return {__html: html}
     }
 
     render() {
@@ -24,7 +31,7 @@ class Thread extends React.Component {
                 {this.props.oneThread != null
                     ? (
                         <div id="thread">
-                            <Breadcrumb topic={this.props.toggledTopic} thread={this.props.oneThread.title}/>
+                            <Breadcrumb topic={this.props.toggledTopic} thread={this.props.oneThread.title} />
                             <div className="reply">
                                 <div className="reply-header">Thread</div>
                                 <div className="reply-container">
@@ -36,9 +43,15 @@ class Thread extends React.Component {
                                     <div className='reply-body'>
                                         <div id="reply-title">{this.props.oneThread.title}</div>
                                         <hr />
-                                        <div className="reply-message">{this.props.oneThread.message}</div>
+                                        <div className="reply-message" dangerouslySetInnerHTML={this.createMarkup(this.props.oneThread.message)}></div>
                                     </div>
-                                    <div className="reply-options">Placeholder Options</div>
+                                    <div className="reply-options">
+                                        <ModalQuote
+                                            getReplies={this.props.getReplies}
+                                            toggledTopic={this.props.toggledTopic}
+                                            threadId={this.props.match.params.threadid}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                             <Replies
@@ -64,8 +77,10 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
+        getReplies: getReplies,
         getOneThread: getOneThread,
-        toggleTopic: toggleTopic
+        toggleTopic: toggleTopic,
+        handleNewQuote: handleNewQuote
     }, dispatch)
 }
 

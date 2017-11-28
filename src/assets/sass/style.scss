@@ -128,7 +128,7 @@ html, body {
 // Topic Component
 
 #topic {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .list-group-item {
@@ -166,6 +166,16 @@ a {
 .flex-right {
   width: 240px;
   font-size: 14px;
+}
+
+#new-thread-link {
+  color: ivory;
+  float: right;
+}
+
+#new-thread-button {
+  margin-bottom: 8px;
+  float: right;
 }
 
 // New Thread Component

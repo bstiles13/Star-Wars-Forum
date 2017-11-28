@@ -10,3 +10,13 @@ export const handleNewReply = (event, topicId, threadId) => {
         }
     }
 }
+
+export const handleNewQuote = (poster, message) => {
+    return {
+        type: "HANDLE_NEW_REPLY",
+        payload: {
+            quotedPoster: poster,
+            quotedMessage: message
+        }
+    }
+}

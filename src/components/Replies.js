@@ -15,6 +15,10 @@ class Replies extends React.Component {
         this.props.toggleTopic(this.props.topicId);
     }
 
+    createMarkup(html) {
+        return {__html: html}
+    }
+
     renderReplies() {
         let replies = this.props.replies;
         if (replies != null) {
@@ -29,7 +33,7 @@ class Replies extends React.Component {
                                 <br /> {reply.time_posted.substring(0, 10)}
                             </div>
                             <div className='reply-body'>
-                                <span className="reply-message">{reply.message}</span>
+                                <span className="reply-message" dangerouslySetInnerHTML={this.createMarkup(reply.message)}></span>
                             </div>
                             <div className="reply-options">
                                 <i className="fa fa-reply option-icon" aria-hidden="true"></i>

@@ -11,14 +11,14 @@ let Reply = require('../model/reply.js');
 router.get('/topics', (req, res) => {
     Topic.aggregate([
         {
-          $lookup:
-            {
-              from: "replies",
-              localField: "_id",
-              foreignField: "topic_id",
-              as: "history"
-            }
-       }
+            $lookup:
+                {
+                    from: "replies",
+                    localField: "_id",
+                    foreignField: "topic_id",
+                    as: "history"
+                }
+        }
     ]).then(data => {
         res.json(data);
     }).catch(err => {
@@ -77,7 +77,6 @@ router.get('/articles', (req, res) => {
 router.post('/newthread', (req, res) => {
     let newThread = req.body;
     newThread.poster = "Anonymous";
-    console.log(newThread);
     Thread.create(newThread).then(data => {
         console.log('new thread success');
         res.json(data);
@@ -90,6 +89,9 @@ router.post('/newreply', (req, res) => {
     let newReply = req.body;
     newReply.poster = "Anonymous";
     console.log(newReply);
+    if (newReply.quotedPoster != null) {
+        newReply.message = '<div class="quote"><div class="quote-poster">Posted by ' + newReply.quotedPoster + '</div><div class="quote-body">' + newReply.quotedMessage + '</div></div><br/>' + newReply.message;
+    }
     Reply.create(newReply).then(data => {
         console.log('new reply success');
         res.send(true);

@@ -99,7 +99,7 @@ html, body {
     transform: rotate(360deg); } }
 
 #topic {
-  overflow: scroll; }
+  overflow: auto; }
 
 .list-group-item {
   background-color: inherit; }
@@ -129,6 +129,14 @@ a {
 .flex-right {
   width: 240px;
   font-size: 14px; }
+
+#new-thread-link {
+  color: ivory;
+  float: right; }
+
+#new-thread-button {
+  margin-bottom: 8px;
+  float: right; }
 
 #new-thread {
   width: 50%;

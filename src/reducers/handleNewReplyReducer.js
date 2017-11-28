@@ -3,6 +3,8 @@ export default function (state = {
     topic_id: null,
     thread_id: null,
     message: null,
+    quotedPoster: null,
+    quotedMessage: null
 }, action) {
     switch (action.type) {
         case "HANDLE_NEW_REPLY":
