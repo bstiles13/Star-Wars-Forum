@@ -7,7 +7,6 @@ import icon from '../assets/images/thread-icon.png'
 import Breadcrumb from './Breadcrumb';
 import { getTopics } from '../actions/getTopicsAction.js';
 
-
 class Forum extends React.Component {
 
     componentDidMount() {

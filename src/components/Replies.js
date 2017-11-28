@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { getReplies } from '../actions/getRepliesAction.js';
 import { handleNewReply } from '../actions/handleNewReplyAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction';
+import ModalQuote from './ModalQuote';
 
 class Replies extends React.Component {
 
@@ -16,7 +17,7 @@ class Replies extends React.Component {
     }
 
     createMarkup(html) {
-        return {__html: html}
+        return { __html: html }
     }
 
     renderReplies() {
@@ -36,7 +37,12 @@ class Replies extends React.Component {
                                 <span className="reply-message" dangerouslySetInnerHTML={this.createMarkup(reply.message)}></span>
                             </div>
                             <div className="reply-options">
-                                <i className="fa fa-reply option-icon" aria-hidden="true"></i>
+                                <ModalQuote
+                                    quote={reply}
+                                    getReplies={this.props.getReplies}
+                                    toggledTopic={this.props.toggledTopic}
+                                    threadId={this.props.threadid}
+                                />
                                 <i className="fa fa-trash option-icon" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -52,7 +58,7 @@ class Replies extends React.Component {
     submitReply() {
         axios.post('/newreply', this.props.newReply).then(data => {
             console.log(data);
-            this.props.getReplies(this.props.threadId);            
+            this.props.getReplies(this.props.threadId);
         })
     }
 
@@ -65,7 +71,7 @@ class Replies extends React.Component {
                     <div className="form-group">
                         <label className="label" htmlFor="threadPost">Quick Reply:</label>
                         <textarea type="text" className="form-control" id="threadPost"
-                            placeholder="Share what's on your mind" name="message" onChange={(event) => this.props.handleNewReply(event, this.props.toggledTopic._id, this.props.threadId )}></textarea>
+                            placeholder="Share what's on your mind" name="message" onChange={(event) => this.props.handleNewReply(event, this.props.toggledTopic._id, this.props.threadId)}></textarea>
                     </div>
                     <button type="submit" className="btn btn-outline-danger" onClick={this.submitReply.bind(this)}>Reply</button>
                     <span id='signature'> poster </span>

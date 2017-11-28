@@ -47,6 +47,7 @@ class Thread extends React.Component {
                                     </div>
                                     <div className="reply-options">
                                         <ModalQuote
+                                            quote={this.props.oneThread}
                                             getReplies={this.props.getReplies}
                                             toggledTopic={this.props.toggledTopic}
                                             threadId={this.props.match.params.threadid}

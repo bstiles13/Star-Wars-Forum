@@ -16,7 +16,7 @@ class ModalQuote extends React.Component {
     render() {
         return (
             <div>
-                <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(this.props.oneThread.poster, this.props.oneThread.message)}></i>
+                <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(this.props.quote.poster, this.props.quote.message)}></i>
                 <div className="modal fade" id="modal-quote" tabIndex="-1" role="dialog" aria-labelledby="modal-quote" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -48,8 +48,7 @@ class ModalQuote extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        oneThread: state.oneThread,        
-        newReply: state.newReply,
+        newReply: state.newReply
     }
 }
 
