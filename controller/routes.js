@@ -26,15 +26,23 @@ router.get('/topics', (req, res) => {
     })
 });
 
-router.get('/threads/:id', (req, res) => {
-    console.log('test', req.params.id);
-    Topic.findOne({ order: req.params.id }).then(data => {
-        Thread.find({ topic_id: data._id }).then(data => {
+router.get('/threads/:id?', (req, res) => {
+    if (req.params.id) {
+        Topic.findOne({ order: req.params.id }).then(data => {
+            Thread.find({ topic_id: data._id }).then(data => {
+                res.json(data);
+            }).catch(err => {
+                throw err;
+            })
+        })
+    } else {
+        Thread.find({}).then(data => {
             res.json(data);
-        }).catch(err => {
+        }).catch(err =>{
             throw err;
         })
-    })
+    }
+
 })
 
 router.get('/replies/:id', (req, res) => {

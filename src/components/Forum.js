@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import icon from '../assets/images/thread-icon.png'
 import Breadcrumb from './Breadcrumb';
-
+import LastPost from './LastPost';
+import { getThreads } from '../actions/getThreadsAction.js';
 import { getTopics } from '../actions/getTopicsAction.js';
 
 
@@ -13,6 +14,14 @@ class Forum extends React.Component {
 
     componentDidMount() {
         this.props.getTopics();
+        this.props.getThreads();
+    }
+
+    renderLastThread(threadId) {
+        console.log('threads', this.props.threads);
+        console.log('thread id', threadId);
+        let lastThread = this.props.threads.find(o => o._id == threadId).title;
+        return lastThread;
     }
 
     renderTopics() {
@@ -30,12 +39,13 @@ class Forum extends React.Component {
                         </div>
                         <div className="list-child flex-right">
                             {
-                                topic.history.length > 0
+                                topic.history.length > 0 && this.props.threads
                                     ? (
-                                        <div>
-                                            <Link to={'/thread/' + topic.order + '/' + lastPost.thread_id }>{lastPost.message.substring(0, 20) + "..."}</Link>
-                                            <div>by {lastPost.poster} on {lastPost.time_posted.substring(0, 10)} </div>
-                                        </div>
+                                        <LastPost 
+                                            topic={topic}
+                                            threads={this.props.threads}
+                                            lastPost={lastPost}
+                                        />
                                     )
                                     : <div>No posts</div>
                             }
@@ -68,13 +78,15 @@ class Forum extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        topics: state.topics
+        topics: state.topics,
+        threads: state.threads
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        getTopics: getTopics
+        getTopics: getTopics,
+        getThreads: getThreads        
     }, dispatch)
 }
 
