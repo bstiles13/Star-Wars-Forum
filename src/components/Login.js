@@ -22,14 +22,14 @@ class Login extends React.Component {
                 break;
             case true:
                 axios.post('/register', this.props.userForm).then(data => {
-                    console.log(data);
-                    this.props.history.push('/');                                                  
+                    console.log('new user', data);
+                    window.location.href = '/';                          
                 })
                 break;
             case null:
                 axios.get('/guest').then(data => {
                     console.log(data);
-                    this.props.history.push('/');                                                  
+                    window.location.href = '/';                          
                 })
                 break;
         }
@@ -77,7 +77,7 @@ class Login extends React.Component {
                 </div>
                 <div id="guest-container">
                     <h3>Guest</h3>
-                    <button type="submit" className="btn btn-primary" onClick={this.submitLogin}>Sign in as "Anonymous" user</button>
+                    <button type="submit" className="btn btn-primary" onClick={() => this.submitLogin(null)}>Sign in as "Anonymous" user</button>
                 </div>
             </div>
         )

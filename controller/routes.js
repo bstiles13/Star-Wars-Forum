@@ -187,8 +187,7 @@ router.post('/login', (req, res) => {
     });
 })
 
-router.post('/guest', (req, res) => {
-    console.log('successful login', user);
+router.get('/guest', (req, res) => {
     req.session.username = 'Anonymous';
     console.log('session', req.session);
     res.json(req.session.username);
@@ -210,7 +209,9 @@ router.post('/register', (req, res) => {
         }
         console.log('new user', newUser);
         User.create(newUser).then(savedUser => {
-            return res.json(savedUser)
+            console.log('saved user', savedUser);
+            req.session.username = savedUser.username;            
+            res.json(savedUser)
         }).catch(err => {
             res.json(err)
         })

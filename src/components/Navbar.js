@@ -34,8 +34,10 @@ class Navbar extends React.Component {
                         <Link to={'/forum'} className="nav-item nav-link">Forums</Link>
                         {
                             this.props.user == null
-                            ? <Link to={'/login'} className="nav-item nav-link">Sign In</Link>
-                            : <Link to={'/'} className="nav-item nav-link" onClick={this.logout.bind(this)}>{'Sign Out (' + this.props.user + ')'}</Link>
+                                ? <Link to={'/login'} className="nav-item nav-link">Sign In</Link>
+                                : this.props.user != 'Anonymous'
+                                    ? <Link to={'/'} className="nav-item nav-link" onClick={this.logout.bind(this)}>{'Sign Out (' + this.props.user + ')'}</Link>
+                                    : <Link to={'/'} className="nav-item nav-link" onClick={this.logout.bind(this)}>{'Sign Out (Guest)'}</Link>
                         }
                     </div>
                 </div>
