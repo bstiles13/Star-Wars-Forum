@@ -10,6 +10,7 @@ class ModalDeleteThread extends React.Component {
         console.log(id);
         axios.get('/deletethread/' + this.props.stagedThread).then(data => {
             this.props.getThreads();
+            this.props.reset();
         })
     }
 

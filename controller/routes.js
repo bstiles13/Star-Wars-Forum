@@ -138,6 +138,24 @@ router.post('/newreply', (req, res) => {
     })
 })
 
+router.post('/editthread', (req, res) => {
+    console.log('body', req.body);
+    Thread.update({ _id: req.body.id }, { title: req.body.title, message: req.body.message }).then(data => {
+        res.json(data);
+    }).catch(err => {
+        throw err;
+    })
+})
+
+router.post('/editreply', (req, res) => {
+    console.log('body', req.body);
+    Reply.update({ _id: req.body.id }, { message: req.body.message }).then(data => {
+        res.json(data);
+    }).catch(err => {
+        throw err;
+    })
+})
+
 router.get('/lastpost/:id', (req, res) => {
     Reply.findOne({ topic_id: req.params.id }).then(data => {
         res.json(data);
@@ -167,6 +185,13 @@ router.post('/login', (req, res) => {
             res.json(user);
         }
     });
+})
+
+router.post('/guest', (req, res) => {
+    console.log('successful login', user);
+    req.session.username = 'Anonymous';
+    console.log('session', req.session);
+    res.json(req.session.username);
 })
 
 router.post('/register', (req, res) => {

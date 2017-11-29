@@ -8,9 +8,11 @@ import { handleNewReply } from '../actions/handleNewReplyAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
-import { stageReply } from '../actions/editAction.js';
+import { flagReplyRemoval, flagReplyEdit, reset } from '../actions/editAction.js';
+import { handleEdit } from '../actions/handleEditAction.js';
 import ModalQuote from './ModalQuote';
 import ModalDeleteReply from './ModalDeleteReply';
+import EditReply from './EditReply';
 
 class Replies extends React.Component {
 
@@ -39,7 +41,11 @@ class Replies extends React.Component {
                                 <br /> {reply.time_posted.substring(0, 10)}
                             </div>
                             <div className='reply-body'>
-                                <span className="reply-message" dangerouslySetInnerHTML={this.createMarkup(reply.message)}></span>
+                                {
+                                    !this.props.pendingEdits.replyToEdit
+                                    ? <span className="reply-message" dangerouslySetInnerHTML={this.createMarkup(reply.message)}></span>
+                                    : <EditReply original={reply.message} getReplies={() => this.props.getReplies(this.props.threadId)}/>
+                                }
                             </div>
                             <div className="reply-options">
                                 <ModalQuote
@@ -48,12 +54,14 @@ class Replies extends React.Component {
                                     toggledTopic={this.props.toggledTopic}
                                     threadId={this.props.threadid}
                                 />
-                                <i class="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.stageReply(reply._id)}></i>
+                                <i className="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.flagReplyRemoval(reply._id)}></i>
                                 <ModalDeleteReply 
                                     getReplies={() => this.props.getReplies(this.props.threadId)}
-                                    stagedReply={this.props.stagedEdits.stagedReply}
+                                    stagedReply={this.props.pendingEdits.stagedReply}
+                                    reset={this.props.reset}
                                     reply={reply}
                                 />
+                                <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
                             </div>
                         </div>
                         <br />
@@ -97,7 +105,7 @@ function mapStateToProps(state) {
         newReply: state.newReply,
         toggledTopic: state.toggledTopic,
         user: state.user,
-        stagedEdits: state.stagedEdits
+        pendingEdits: state.pendingEdits
     }
 }
 
@@ -107,7 +115,10 @@ function matchDispatchToProps(dispatch) {
         handleNewReply: handleNewReply,
         toggleTopic: toggleTopic,
         setReplyUser: setReplyUser,
-        stageReply: stageReply
+        flagReplyRemoval: flagReplyRemoval,
+        flagReplyEdit: flagReplyEdit,
+        reset: reset,
+        handleEdit: handleEdit
     }, dispatch)
 }
 

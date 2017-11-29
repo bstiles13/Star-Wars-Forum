@@ -6,7 +6,7 @@ import { getUser } from '../actions/getUserAction.js';
 import { getThreads } from '../actions/getThreadsAction.js';
 import Breadcrumb from './Breadcrumb';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
-import { stageThread } from '../actions/editAction.js';
+import { flagThreadRemoval, reset } from '../actions/editAction.js';
 import ModalDeleteThread from './ModalDeleteThread';
 
 class Topic extends React.Component {
@@ -28,10 +28,11 @@ class Topic extends React.Component {
                         <td>{thread.time_posted.substring(0, 10)}</td>
                         <td>{thread.history.length}</td>
                         <td>
-                            <i className="fa fa-trash" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-thread" onClick={() => this.props.stageThread(thread._id)}></i>
+                            <i className="fa fa-trash" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-thread" onClick={() => this.props.flagThreadRemoval(thread._id)}></i>
                             <ModalDeleteThread
                                 getThreads={() => this.props.getThreads(this.props.match.params.id)}
-                                stagedThread={this.props.stagedEdits.stagedThread}
+                                stagedThread={this.props.pendingEdits.stagedThread}
+                                reset={this.props.reset}
                             />
                         </td>
                     </tr>
@@ -77,7 +78,7 @@ function mapStateToProps(state) {
         threads: state.threads,
         toggledTopic: state.toggledTopic,
         user: state.user,
-        stagedEdits: state.stagedEdits
+        pendingEdits: state.pendingEdits
     }
 }
 
@@ -86,7 +87,8 @@ function matchDispatchToProps(dispatch) {
         getThreads: getThreads,
         toggleTopic: toggleTopic,
         getUser: getUser,
-        stageThread: stageThread
+        flagThreadRemoval: flagThreadRemoval,
+        reset: reset
     }, dispatch)
 }
 

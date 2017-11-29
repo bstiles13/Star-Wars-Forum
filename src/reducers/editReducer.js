@@ -1,7 +1,8 @@
 export default function (state = {
-    stagedThread: null,
-    stagedReply: null,
-    stagedEdit: null
+    threadToDelete: null,
+    threadToEdit: null,
+    replyToDelete: null,
+    replyToEdit: null
 }, action) {
     switch (action.type) {
         case 'STAGE_REPLY':
@@ -12,6 +13,9 @@ export default function (state = {
             break;
         case 'STAGE_EDIT':
             state = { ...state, ...action.payload }
+            break;
+        case 'RESET':
+            return action.payload
             break;
     }
     return state;

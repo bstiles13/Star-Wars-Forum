@@ -1,21 +1,28 @@
-export const stageThread = (id) => {
+export const flagThreadRemoval = (id) => {
     return {
         type: 'STAGE_REPLY',
-        payload: {stagedThread: id}
+        payload: {threadToDelete: id}
     }
 }
 
-export const stageReply = (id) => {
+export const flagReplyRemoval = (id) => {
     return {
         type: 'STAGE_REPLY',
-        payload: {stagedReply: id}
+        payload: {replyToDelete: id}
     }
 }
 
-export const stageEdit = (id) => {
+export const flagThreadEdit = (id) => {
     return {
         type: 'STAGE_EDIT',
-        payload: {stagedEdit: id}
+        payload: {threadToEdit: id}
+    }
+}
+
+export const flagReplyEdit = (id) => {
+    return {
+        type: 'STAGE_EDIT',
+        payload: {replyToEdit: id}
     }
 }
 
@@ -23,9 +30,10 @@ export const reset = () => {
     return {
         type: 'RESET',
         payload: {
-            stagedThread: null,
-            stagedReply: null,
-            stagedEdit: null
+            threadToDelete: null,
+            threadToEdit: null,
+            replyToDelete: null,
+            replyToEdit: null
         }
     }
 }

@@ -6,10 +6,13 @@ import { getOneThread } from '../actions/getOneThreadAction.js';
 import { getReplies } from '../actions/getRepliesAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
 import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
+import { flagThreadEdit } from '../actions/editAction.js';
+import { handleEdit } from '../actions/handleEditAction.js';
 import Replies from './Replies';
 import Breadcrumb from './Breadcrumb';
 import ModalQuote from './ModalQuote';
 import ModalDeleteReply from './ModalDeleteReply';
+import EditThread from './EditThread';
 
 class Thread extends React.Component {
 
@@ -44,7 +47,15 @@ class Thread extends React.Component {
                                     <div className='reply-body'>
                                         <div id="reply-title">{this.props.oneThread.title}</div>
                                         <hr />
-                                        <div className="reply-message" dangerouslySetInnerHTML={this.createMarkup(this.props.oneThread.message)}></div>
+                                        {
+                                            !this.props.pendingEdits.threadToEdit
+                                            ? <div className="reply-message" dangerouslySetInnerHTML={this.createMarkup(this.props.oneThread.message)}></div>
+                                            : <EditThread
+                                                originalMessage={this.props.oneThread.message}
+                                                originalTitle={this.props.oneThread.title}
+                                                getOneThread={() => this.props.getOneThread(this.props.match.params.threadid)}
+                                                />
+                                        }
                                     </div>
                                     <div className="reply-options">
                                         <ModalQuote
@@ -53,6 +64,7 @@ class Thread extends React.Component {
                                             toggledTopic={this.props.toggledTopic}
                                             threadId={this.props.match.params.threadid}
                                         />
+                                        <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(this.props.oneThread._id) && this.props.handleEdit(event, this.props.oneThread.message, this.props.oneThread.title)}></i>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +85,8 @@ class Thread extends React.Component {
 function mapStateToProps(state) {
     return {
         oneThread: state.oneThread,
-        toggledTopic: state.toggledTopic
+        toggledTopic: state.toggledTopic,
+        pendingEdits: state.pendingEdits
     }
 }
 
@@ -82,7 +95,9 @@ function matchDispatchToProps(dispatch) {
         getReplies: getReplies,
         getOneThread: getOneThread,
         toggleTopic: toggleTopic,
-        handleNewQuote: handleNewQuote
+        handleNewQuote: handleNewQuote,
+        flagThreadEdit: flagThreadEdit,
+        handleEdit: handleEdit
     }, dispatch)
 }
 
