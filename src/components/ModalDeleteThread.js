@@ -1,15 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
-class ModalDeletePost extends React.Component {
+class ModalDeleteThread extends React.Component {
 
     componentDidMount() {
     }
 
     deleteThread(id) {
         console.log(id);
-        axios.get('/deletethread/' + this.props.stagedEdits.stagedThread).then(data => {
+        axios.get('/deletethread/' + this.props.stagedThread).then(data => {
             this.props.getThreads();
         })
     }
@@ -41,10 +40,4 @@ class ModalDeletePost extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        stagedEdits: state.stagedEdits
-    }
-}
-
-export default connect(mapStateToProps)(ModalDeletePost);
+export default ModalDeleteThread;

@@ -31,6 +31,7 @@ class Topic extends React.Component {
                             <i className="fa fa-trash" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-thread" onClick={() => this.props.stageThread(thread._id)}></i>
                             <ModalDeleteThread
                                 getThreads={() => this.props.getThreads(this.props.match.params.id)}
+                                stagedThread={this.props.stagedEdits.stagedThread}
                             />
                         </td>
                     </tr>
@@ -75,7 +76,8 @@ function mapStateToProps(state) {
     return {
         threads: state.threads,
         toggledTopic: state.toggledTopic,
-        user: state.user
+        user: state.user,
+        stagedEdits: state.stagedEdits
     }
 }
 

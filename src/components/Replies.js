@@ -51,6 +51,7 @@ class Replies extends React.Component {
                                 <i class="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.stageReply(reply._id)}></i>
                                 <ModalDeleteReply 
                                     getReplies={() => this.props.getReplies(this.props.threadId)}
+                                    stagedReply={this.props.stagedEdits.stagedReply}
                                     reply={reply}
                                 />
                             </div>
@@ -95,7 +96,8 @@ function mapStateToProps(state) {
         replies: state.replies,
         newReply: state.newReply,
         toggledTopic: state.toggledTopic,
-        user: state.user
+        user: state.user,
+        stagedEdits: state.stagedEdits
     }
 }
 

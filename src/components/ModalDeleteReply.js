@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import { connect } from 'react-redux';
 
 class ModalDeleteReply extends React.Component {
 
     deleteReply() {
-        axios.get('/deletereply/' + this.props.stagedEdits.stagedReply).then(data => {
+        axios.get('/deletereply/' + this.props.stagedReply).then(data => {
             this.props.getReplies();
         })
     }
@@ -37,10 +36,4 @@ class ModalDeleteReply extends React.Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        stagedEdits: state.stagedEdits
-    }
-}
-
-export default connect(mapStateToProps)(ModalDeleteReply);
+export default ModalDeleteReply;

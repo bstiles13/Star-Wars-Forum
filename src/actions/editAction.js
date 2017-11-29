@@ -18,3 +18,14 @@ export const stageEdit = (id) => {
         payload: {stagedEdit: id}
     }
 }
+
+export const reset = () => {
+    return {
+        type: 'RESET',
+        payload: {
+            stagedThread: null,
+            stagedReply: null,
+            stagedEdit: null
+        }
+    }
+}
