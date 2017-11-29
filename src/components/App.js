@@ -15,12 +15,12 @@ class App extends React.Component {
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          <Route exact path="/" render={props => <Home />} />
-          <Route path="/forum" render={props => <Forum />} />
-          <Route path="/topic/:id" render={props => <Topic {...props} />} />
-          <Route path="/thread/:topicid/:threadid" render={props => <Thread {...props} />} />
-          <Route path="/newthread/:id" render={props => <NewThread {...props} />} />
-          <Route path="/login" render={props => <Login />} />
+          <Route exact path="/" component={Home} />
+          <Route path="/forum" component={Forum} />
+          <Route path="/topic/:id" component={Topic} />
+          <Route path="/thread/:topicid/:threadid" component={Thread} />
+          <Route path="/newthread/:id" component={NewThread} />
+          <Route path="/login" component={Login} />
         </div>
       </BrowserRouter>
     );

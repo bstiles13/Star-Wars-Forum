@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getUser } from '../actions/getUserAction.js';
 import { getThreads } from '../actions/getThreadsAction.js';
 import Breadcrumb from './Breadcrumb';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
@@ -9,7 +10,7 @@ import { toggleTopic } from '../actions/toggleTopicAction.js';
 class Topic extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.match);
+        this.props.getUser();        
         this.props.getThreads(this.props.match.params.id);
         this.props.toggleTopic(this.props.match.params.id);
     }
@@ -38,7 +39,11 @@ class Topic extends React.Component {
             <div id="topic">
                 {/* {"Topic: " + this.props.match.params.id} */}
                 <Breadcrumb topic={this.props.toggledTopic}/>
-                <button type="button" id="new-thread-button" className="btn btn-danger btn-sm"><Link to={'/newthread/' + this.props.match.params.id} id="new-thread-link">New Thread</Link></button>
+                {
+                    this.props.user
+                    ? <button type="button" id="new-thread-button" className="btn btn-danger btn-sm"><Link to={'/newthread/' + this.props.match.params.id} id="new-thread-link">New Thread</Link></button>
+                    : <button type="button" id="new-thread-button" className="btn btn-danger btn-sm" disabled>New Thread</button>
+                }
                 <br />
                 <table className="table table-hover">
                     <thead>
@@ -62,14 +67,16 @@ class Topic extends React.Component {
 function mapStateToProps (state) {
     return {
         threads: state.threads,
-        toggledTopic: state.toggledTopic
+        toggledTopic: state.toggledTopic,
+        user: state.user
     }
 }
 
 function matchDispatchToProps (dispatch) {
     return bindActionCreators({
         getThreads: getThreads,
-        toggleTopic: toggleTopic
+        toggleTopic: toggleTopic,
+        getUser: getUser
     }, dispatch)
 }
 

@@ -17,17 +17,19 @@ class Login extends React.Component {
             case false:
                 axios.post('/login', this.props.userForm).then(data => {
                     console.log(data);
+                    window.location.href = '/';                          
                 })
                 break;
             case true:
                 axios.post('/register', this.props.userForm).then(data => {
                     console.log(data);
-
+                    this.props.history.push('/');                                                  
                 })
                 break;
             case null:
                 axios.get('/guest').then(data => {
                     console.log(data);
+                    this.props.history.push('/');                                                  
                 })
                 break;
         }
@@ -91,7 +93,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        handleLogin: handleLogin
+        handleLogin: handleLogin,
     }, dispatch)
 }
 

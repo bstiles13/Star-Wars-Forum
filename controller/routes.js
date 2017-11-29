@@ -129,7 +129,7 @@ router.get('/lastpost/:id', (req, res) => {
 })
 
 // this route is just used to get the user basic info
-router.get('/checkuser', (req, res, next) => {
+router.get('/getuser', (req, res, next) => {
 	console.log('===== user!!======')
 	console.log(req.session.username)
 	if (req.session.username) {
@@ -180,8 +180,8 @@ router.post('/register', (req, res) => {
 
 router.get('/logout', (req, res) => {
 	if (req.session.username) {
-		req.session.destroy()
-		return res.json({ msg: 'logging you out' })
+        req.session.username = null;
+		return res.json({ user: req.session.username })
 	} else {
 		return res.json({ msg: 'no user to log out!' })
 	}

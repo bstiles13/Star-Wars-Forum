@@ -1,8 +1,26 @@
 import React from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getUser } from '../actions/getUserAction.js';
 import logo from '../assets/images/logo.png';
 
 class Navbar extends React.Component {
+
+    componentDidMount() {
+        console.log('nav mounted');
+        this.props.getUser();
+    }
+
+    logout() {
+        axios.get('/logout').then(data => {
+            console.log('logged out', data.data);
+            this.props.getUser();
+            window.location.href = '/';
+        })
+    }
+
     render() {
         return (
             <div id="navbar">
@@ -14,7 +32,11 @@ class Navbar extends React.Component {
                     <div id="nav-links">
                         <Link to={'/'} className="nav-item nav-link">Home</Link>
                         <Link to={'/forum'} className="nav-item nav-link">Forums</Link>
-                        <Link to={'/login'} className="nav-item nav-link">Sign In</Link>
+                        {
+                            this.props.user == null
+                            ? <Link to={'/login'} className="nav-item nav-link">Sign In</Link>
+                            : <Link to={'/'} className="nav-item nav-link" onClick={this.logout.bind(this)}>{'Sign Out (' + this.props.user + ')'}</Link>
+                        }
                     </div>
                 </div>
                 <img id="logo" src={logo} />
@@ -23,4 +45,16 @@ class Navbar extends React.Component {
     }
 }
 
-export default Navbar;
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        getUser: getUser
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(Navbar);
