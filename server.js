@@ -3,13 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routes = require('./controller/routes.js');
-
-// Server congfiguration and middleware
-const app = express();
-const PORT = process.env.PORT || 3001;
-app.use(bodyParser.json());
-app.use(express.static(__dirname + "/build"));
-app.use("/", routes);
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 
 // MongoDB Settings
 const target = "starwars_db";
@@ -23,6 +18,22 @@ mongoose.connect(db, function (err) {
         console.log("Successful MongoDB connection to " + target);
     }
 });
+let dbConnection = mongoose.connection;
+
+// Server congfiguration and middleware
+const app = express();
+const PORT = process.env.PORT || 3001;
+app.use(session({
+    secret: 'work hard',
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+        mongooseConnection: dbConnection
+    })
+}));
+app.use(bodyParser.json());
+app.use(express.static(__dirname + "/build"));
+app.use("/", routes);
 
 // Start Express Server
 app.listen(PORT, function () {

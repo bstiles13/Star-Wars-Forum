@@ -6,6 +6,7 @@ let moment = require('moment');
 let Topic = require('../model/topic.js');
 let Thread = require('../model/thread.js');
 let Reply = require('../model/reply.js');
+let User = require('../model/User.js');
 
 // Sends topics to homepage for display
 router.get('/topics', (req, res) => {
@@ -125,6 +126,65 @@ router.get('/lastpost/:id', (req, res) => {
     Reply.findOne({ topic_id: req.params.id }).then(data => {
         res.json(data);
     })
+})
+
+// this route is just used to get the user basic info
+router.get('/checkuser', (req, res, next) => {
+	console.log('===== user!!======')
+	console.log(req.session.username)
+	if (req.session.username) {
+		return res.json({ user: req.session.username })
+	} else {
+		return res.json({ user: null })
+	}
+})
+
+router.post('/login', (req, res) => {
+    User.authenticate(req.body.existingUsername, req.body.existingPassword, (error, user) => {
+        if (error || !user) {
+            var err = new Error('Wrong email or password.');
+            err.status = 401;
+            req.session.username = null;
+            res.send(false);
+        } else {
+            console.log('successful login', user);
+            req.session.username = user.username;
+            console.log('session', req.session);
+            res.json(user);
+        }
+    });
+})
+
+router.post('/register', (req, res) => {
+    console.log('registering');
+    const { newUsername, newPassword1 } = req.body
+    // ADD VALIDATION
+    User.findOne({ username: newUsername }, (err, userMatch) => {
+        if (userMatch) {
+            return res.json({
+                error: `Sorry, already a user with the username: ${newUsername}`
+            })
+        }
+        const newUser = {
+            username: newUsername,
+            password: newPassword1
+        }
+        console.log('new user', newUser);
+        User.create(newUser).then(savedUser => {
+            return res.json(savedUser)
+        }).catch(err => {
+            res.json(err)
+        })
+    })
+})
+
+router.get('/logout', (req, res) => {
+	if (req.session.username) {
+		req.session.destroy()
+		return res.json({ msg: 'logging you out' })
+	} else {
+		return res.json({ msg: 'no user to log out!' })
+	}
 })
 
 // Default route that sends HTML file to browser

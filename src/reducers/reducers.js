@@ -7,6 +7,8 @@ import handleNewThreadReducer from './handleNewThreadReducer.js';
 import handleNewReplyReducer from './handleNewReplyReducer.js';
 import getRepliesReducer from './getRepliesReducer.js';
 import toggleTopicReducer from './toggleTopicReducer.js';
+import handleLoginReducer from './handleLoginReducer.js';
+import handleWarningsReducer from './handleWarningsReducer.js';
 
 let reducers = combineReducers({
     articles: getArticlesReducer,
@@ -16,7 +18,9 @@ let reducers = combineReducers({
     newThread: handleNewThreadReducer,
     newReply: handleNewReplyReducer,
     replies: getRepliesReducer,
-    toggledTopic: toggleTopicReducer
+    toggledTopic: toggleTopicReducer,
+    userForm: handleLoginReducer,
+    warnings: handleWarningsReducer
 })
 
 export default reducers;
