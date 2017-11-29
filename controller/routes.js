@@ -98,9 +98,7 @@ router.get('/articles', (req, res) => {
 
 router.post('/newthread', (req, res) => {
     let newThread = req.body;
-    newThread.poster = "Anonymous";
     Thread.create(newThread).then(data => {
-        console.log('new thread success');
         res.json(data);
     }).catch(err => {
         console.log(err);
@@ -109,8 +107,6 @@ router.post('/newthread', (req, res) => {
 
 router.post('/newreply', (req, res) => {
     let newReply = req.body;
-    newReply.poster = "Anonymous";
-    console.log(newReply);
     if (newReply.quotedPoster != null) {
         newReply.message = '<div class="quote"><div class="quote-poster">Posted by ' + newReply.quotedPoster + '</div><div class="quote-body">' + newReply.quotedMessage + '</div></div><br/>' + newReply.message;
     }
@@ -130,8 +126,6 @@ router.get('/lastpost/:id', (req, res) => {
 
 // this route is just used to get the user basic info
 router.get('/getuser', (req, res, next) => {
-	console.log('===== user!!======')
-	console.log(req.session.username)
 	if (req.session.username) {
 		return res.json({ user: req.session.username })
 	} else {

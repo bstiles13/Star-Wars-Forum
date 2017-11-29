@@ -93,7 +93,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        handleLogin: handleLogin,
+        handleLogin: handleLogin
     }, dispatch)
 }
 

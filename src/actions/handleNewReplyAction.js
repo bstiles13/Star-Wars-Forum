@@ -26,3 +26,12 @@ export const handleNewQuote = (poster, message) => {
         }
     }
 }
+
+export const setReplyUser = (user) => {
+    return {
+        type: "HANDLE_NEW_REPLY",
+        payload: {
+            poster: user
+        }
+    }
+}

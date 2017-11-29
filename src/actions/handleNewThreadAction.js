@@ -9,3 +9,12 @@ export const handleNewThread = (event, topicId) => {
         }
     }
 }
+
+export const setThreadUser = (user) => {
+    return {
+        type: "HANDLE_NEW_THREAD",
+        payload: {
+            poster: user
+        }
+    }
+}

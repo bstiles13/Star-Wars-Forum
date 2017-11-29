@@ -7,11 +7,14 @@ import { getReplies } from '../actions/getRepliesAction.js';
 import { handleNewReply } from '../actions/handleNewReplyAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction';
 import ModalQuote from './ModalQuote';
+import { setThreadUser } from '../actions/handleNewThreadAction.js';
+import { setReplyUser } from '../actions/handleNewReplyAction.js';
 
 class Replies extends React.Component {
 
     componentDidMount() {
         console.log(this.props.match);
+        this.props.setReplyUser(this.props.user);
         this.props.getReplies(this.props.threadId);
         this.props.toggleTopic(this.props.topicId);
     }
@@ -85,7 +88,8 @@ function mapStateToProps(state) {
     return {
         replies: state.replies,
         newReply: state.newReply,
-        toggledTopic: state.toggledTopic
+        toggledTopic: state.toggledTopic,
+        user: state.user
     }
 }
 
@@ -93,7 +97,8 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getReplies: getReplies,
         handleNewReply: handleNewReply,
-        toggleTopic: toggleTopic
+        toggleTopic: toggleTopic,
+        setReplyUser: setReplyUser
     }, dispatch)
 }
 

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { handleNewThread } from '../actions/handleNewThreadAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
+import { setThreadUser } from '../actions/handleNewThreadAction.js';
 
 class NewThread extends React.Component {
 
@@ -15,6 +16,7 @@ class NewThread extends React.Component {
     }
 
     componentDidMount() {
+        this.props.setThreadUser(this.props.user);        
         this.props.toggleTopic(this.props.match.params.id);
     }
 
@@ -54,14 +56,16 @@ function mapStateToProps(state) {
     return {
         topics: state.topics,
         newThread: state.newThread,
-        toggledTopic: state.toggledTopic
+        toggledTopic: state.toggledTopic,
+        user: state.user
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         handleNewThread: handleNewThread,
-        toggleTopic: toggleTopic
+        toggleTopic: toggleTopic,
+        setThreadUser: setThreadUser
     }, dispatch)
 }
 

@@ -3,8 +3,13 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
+import { setReplyUser } from '../actions/handleNewReplyAction.js';
 
 class ModalQuote extends React.Component {
+
+    componentDidMount() {
+        this.props.setReplyUser(this.props.user);
+    }
 
     submitReply() {
         axios.post('/newreply', this.props.newReply).then(data => {
@@ -48,14 +53,16 @@ class ModalQuote extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        newReply: state.newReply
+        newReply: state.newReply,
+        user: state.user
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         handleNewReply: handleNewReply,
-        handleNewQuote: handleNewQuote        
+        handleNewQuote: handleNewQuote,
+        setReplyUser: setReplyUser
     }, dispatch)
 }
 
