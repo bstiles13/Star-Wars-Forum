@@ -8,8 +8,9 @@ import { handleNewReply } from '../actions/handleNewReplyAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
+import { stageReply } from '../actions/editAction.js';
 import ModalQuote from './ModalQuote';
-import ModalDeletePost from './ModalDeletePost';
+import ModalDeleteReply from './ModalDeleteReply';
 
 class Replies extends React.Component {
 
@@ -47,7 +48,11 @@ class Replies extends React.Component {
                                     toggledTopic={this.props.toggledTopic}
                                     threadId={this.props.threadid}
                                 />
-                                <ModalDeletePost />
+                                <i class="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.stageReply(reply._id)}></i>
+                                <ModalDeleteReply 
+                                    getReplies={() => this.props.getReplies(this.props.threadId)}
+                                    reply={reply}
+                                />
                             </div>
                         </div>
                         <br />
@@ -99,7 +104,8 @@ function matchDispatchToProps(dispatch) {
         getReplies: getReplies,
         handleNewReply: handleNewReply,
         toggleTopic: toggleTopic,
-        setReplyUser: setReplyUser
+        setReplyUser: setReplyUser,
+        stageReply: stageReply
     }, dispatch)
 }
 

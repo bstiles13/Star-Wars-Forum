@@ -1,0 +1,50 @@
+import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+
+class ModalDeletePost extends React.Component {
+
+    componentDidMount() {
+    }
+
+    deleteThread(id) {
+        console.log(id);
+        axios.get('/deletethread/' + this.props.stagedEdits.stagedThread).then(data => {
+            this.props.getThreads();
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <div className="modal fade" id="modal-delete-thread" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">Delete</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Are you sure you want to delete your thread?</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={() => this.deleteThread(this.props.threadId)}>Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        stagedEdits: state.stagedEdits
+    }
+}
+
+export default connect(mapStateToProps)(ModalDeletePost);

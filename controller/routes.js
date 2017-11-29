@@ -69,11 +69,31 @@ router.get('/replies/:id', (req, res) => {
     })
 })
 
+router.get('/deletereply/:id', (req, res) => {
+    Reply.remove({ _id: req.params.id }).then(data => {
+        res.json(data);
+    }).catch(err => {
+        res.json(err);
+    });
+})
+
 router.get('/thread/:id', function (req, res) {
     var id = req.params.id;
     Thread.findOne({ _id: id }).then(data => {
         res.json(data);
     })
+})
+
+router.get('/deletethread/:id', (req, res) => {
+    Thread.remove({ _id: req.params.id }).then(data => {
+        Reply.remove({ thread_id: req.params.id }).then(data => {
+            res.json(data);
+        }).catch(err => {
+            res.json(err);
+        });
+    }).catch(err => {
+        res.json(err);
+    });
 })
 
 router.get('/topicdetail/:id', (req, res) => {
@@ -126,11 +146,11 @@ router.get('/lastpost/:id', (req, res) => {
 
 // this route is just used to get the user basic info
 router.get('/getuser', (req, res, next) => {
-	if (req.session.username) {
-		return res.json({ user: req.session.username })
-	} else {
-		return res.json({ user: null })
-	}
+    if (req.session.username) {
+        return res.json({ user: req.session.username })
+    } else {
+        return res.json({ user: null })
+    }
 })
 
 router.post('/login', (req, res) => {
@@ -173,12 +193,12 @@ router.post('/register', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-	if (req.session.username) {
+    if (req.session.username) {
         req.session.username = null;
-		return res.json({ user: req.session.username })
-	} else {
-		return res.json({ msg: 'no user to log out!' })
-	}
+        return res.json({ user: req.session.username })
+    } else {
+        return res.json({ msg: 'no user to log out!' })
+    }
 })
 
 // Default route that sends HTML file to browser

@@ -1,11 +1,19 @@
 import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
 
-class ModalDeletePost extends React.Component {
+class ModalDeleteReply extends React.Component {
+
+    deleteReply() {
+        axios.get('/deletereply/' + this.props.stagedEdits.stagedReply).then(data => {
+            this.props.getReplies();
+        })
+    }
+
     render() {
         return (
             <div>
-                <i class="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-post"></i>
-                <div class="modal fade" id="modal-delete-post" tabindex="-1" role="dialog" aria-labelledby="modal-delete" aria-hidden="true">
+                <div class="modal fade" id="modal-delete-reply" tabindex="-1" role="dialog" aria-labelledby="modal-delete" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -19,7 +27,7 @@ class ModalDeletePost extends React.Component {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Confirm</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onClick={this.deleteReply.bind(this)}>Confirm</button>
                             </div>
                         </div>
                     </div>
@@ -29,4 +37,10 @@ class ModalDeletePost extends React.Component {
     }
 }
 
-export default ModalDeletePost;
+function mapStateToProps(state) {
+    return {
+        stagedEdits: state.stagedEdits
+    }
+}
+
+export default connect(mapStateToProps)(ModalDeleteReply);

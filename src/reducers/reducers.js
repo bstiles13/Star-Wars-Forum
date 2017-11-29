@@ -10,6 +10,7 @@ import toggleTopicReducer from './toggleTopicReducer.js';
 import handleLoginReducer from './handleLoginReducer.js';
 import handleWarningsReducer from './handleWarningsReducer.js';
 import getUserReducer from './getUserReducer.js';
+import editReducer from './editReducer.js';
 
 let reducers = combineReducers({
     articles: getArticlesReducer,
@@ -22,6 +23,7 @@ let reducers = combineReducers({
     toggledTopic: toggleTopicReducer,
     userForm: handleLoginReducer,
     warnings: handleWarningsReducer,
+    stagedEdits: editReducer,
     user: getUserReducer
 })
 
