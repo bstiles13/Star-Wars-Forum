@@ -6,9 +6,10 @@ import { bindActionCreators } from 'redux';
 import { getReplies } from '../actions/getRepliesAction.js';
 import { handleNewReply } from '../actions/handleNewReplyAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction';
-import ModalQuote from './ModalQuote';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
+import ModalQuote from './ModalQuote';
+import ModalDeletePost from './ModalDeletePost';
 
 class Replies extends React.Component {
 
@@ -46,7 +47,7 @@ class Replies extends React.Component {
                                     toggledTopic={this.props.toggledTopic}
                                     threadId={this.props.threadid}
                                 />
-                                <i className="fa fa-trash option-icon" aria-hidden="true"></i>
+                                <ModalDeletePost />
                             </div>
                         </div>
                         <br />

@@ -9,6 +9,7 @@ import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.
 import Replies from './Replies';
 import Breadcrumb from './Breadcrumb';
 import ModalQuote from './ModalQuote';
+import ModalDeletePost from './ModalDeletePost';
 
 class Thread extends React.Component {
 
@@ -52,6 +53,7 @@ class Thread extends React.Component {
                                             toggledTopic={this.props.toggledTopic}
                                             threadId={this.props.match.params.threadid}
                                         />
+                                        <ModalDeletePost />
                                     </div>
                                 </div>
                             </div>
