@@ -1,8 +1,8 @@
 import React from 'react';
-import axios from 'axios';
 import Statistics from './Statistics';
 import Articles from './Articles';
 import Tweets from './Tweets';
+import axios from 'axios';
 
 class Home extends React.Component {
 

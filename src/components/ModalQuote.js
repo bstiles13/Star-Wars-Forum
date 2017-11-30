@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { handleNewReply } from '../actions/handleNewReplyAction.js';

@@ -1,8 +1,9 @@
 import React from 'react';
+import Loader from './Loader';
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getArticles } from '../actions/getArticlesAction.js';
-import Loader from './Loader';
 
 class Articles extends React.Component {
 

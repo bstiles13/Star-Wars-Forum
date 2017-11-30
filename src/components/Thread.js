@@ -1,5 +1,11 @@
 import React from 'react';
 import { Link } from 'react-dom';
+import Replies from './Replies';
+import Breadcrumb from './Breadcrumb';
+import ModalQuote from './ModalQuote';
+import ModalDeleteReply from './ModalDeleteReply';
+import EditThread from './EditThread';
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getOneThread } from '../actions/getOneThreadAction.js';
@@ -9,11 +15,6 @@ import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.
 import { flagThreadEdit } from '../actions/editAction.js';
 import { handleEdit } from '../actions/handleEditAction.js';
 import { getUser } from '../actions/getUserAction.js';
-import Replies from './Replies';
-import Breadcrumb from './Breadcrumb';
-import ModalQuote from './ModalQuote';
-import ModalDeleteReply from './ModalDeleteReply';
-import EditThread from './EditThread';
 
 class Thread extends React.Component {
 

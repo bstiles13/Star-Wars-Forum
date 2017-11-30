@@ -1,10 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Breadcrumb from './Breadcrumb';
+import axios from 'axios';
+import icon from '../assets/images/thread-icon.png'
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import icon from '../assets/images/thread-icon.png'
-import Breadcrumb from './Breadcrumb';
 import { getTopics } from '../actions/getTopicsAction.js';
 
 class Forum extends React.Component {

@@ -1,4 +1,9 @@
 import React from 'react';
+import ModalQuote from './ModalQuote';
+import ModalDeleteReply from './ModalDeleteReply';
+import EditReply from './EditReply';
+import NewReply from './NewReply';
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReplies } from '../actions/getRepliesAction.js';
@@ -8,10 +13,6 @@ import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
 import { flagReplyRemoval, flagReplyEdit, resetEditFlags } from '../actions/editAction.js';
 import { handleEdit } from '../actions/handleEditAction.js';
-import ModalQuote from './ModalQuote';
-import ModalDeleteReply from './ModalDeleteReply';
-import EditReply from './EditReply';
-import NewReply from './NewReply';
 
 class Replies extends React.Component {
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import logo from '../assets/images/logo.png';
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUser, resetUser } from '../actions/getUserAction.js';
-import logo from '../assets/images/logo.png';
 
 class Navbar extends React.Component {
 

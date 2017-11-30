@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Breadcrumb from './Breadcrumb';
+import ModalDeleteThread from './ModalDeleteThread';
+// Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getUser } from '../actions/getUserAction.js';
 import { getThreads } from '../actions/getThreadsAction.js';
-import Breadcrumb from './Breadcrumb';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
 import { flagThreadRemoval, resetEditFlags } from '../actions/editAction.js';
-import ModalDeleteThread from './ModalDeleteThread';
 
 class Topic extends React.Component {
 
