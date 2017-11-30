@@ -8,6 +8,9 @@ export default function (state = {
         case "HANDLE_NEW_THREAD":
             state = { ...state, ...action.payload }
             break;
+        case "RESET_NEW_THREAD":
+            return action.payload;
+            break;
     }
     return state;
 }

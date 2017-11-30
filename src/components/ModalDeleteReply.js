@@ -4,7 +4,7 @@ import axios from 'axios';
 class ModalDeleteReply extends React.Component {
 
     deleteReply() {
-        axios.get('/deletereply/' + this.props.stagedReply).then(data => {
+        axios.get('/deletereply/' + this.props.replyToDelete).then(data => {
             this.props.getReplies();
             this.props.reset();
         })

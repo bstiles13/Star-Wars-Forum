@@ -70,6 +70,7 @@ router.get('/replies/:id', (req, res) => {
 })
 
 router.get('/deletereply/:id', (req, res) => {
+    console.log('delete id', req.params.id);    
     Reply.remove({ _id: req.params.id }).then(data => {
         res.json(data);
     }).catch(err => {
@@ -219,9 +220,9 @@ router.post('/register', (req, res) => {
 router.get('/logout', (req, res) => {
     if (req.session.username) {
         req.session.username = null;
-        return res.json({ user: req.session.username })
+        res.json({ user: req.session.username })
     } else {
-        return res.json({ msg: 'no user to log out!' })
+        res.json({ msg: 'no user to log out!' })
     }
 })
 

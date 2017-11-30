@@ -8,6 +8,7 @@ import { toggleTopic } from '../actions/toggleTopicAction.js';
 import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
 import { flagThreadEdit } from '../actions/editAction.js';
 import { handleEdit } from '../actions/handleEditAction.js';
+import { getUser } from '../actions/getUserAction.js';
 import Replies from './Replies';
 import Breadcrumb from './Breadcrumb';
 import ModalQuote from './ModalQuote';
@@ -17,55 +18,64 @@ import EditThread from './EditThread';
 class Thread extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.match);
+        this.props.getUser();
         this.props.toggleTopic(this.props.match.params.topicid);
         this.props.getOneThread(this.props.match.params.threadid);
     }
 
     createMarkup(html) {
-        return {__html: html}
+        return { __html: html }
     }
 
     render() {
         return (
             <div>
-                {"Topic: " + this.props.match.params.topicid}
-                <br />
-                {"Thread: " + this.props.match.params.threadid}
                 {this.props.oneThread != null
                     ? (
                         <div id="thread">
                             <Breadcrumb topic={this.props.toggledTopic} thread={this.props.oneThread.title} />
-                            <div className="reply">
-                                <div className="reply-header">Thread</div>
-                                <div className="reply-container">
-                                    <div className='reply-signature'>
+                            <div className="thread">
+                                <div className="thread-header">Thread</div>
+                                <div className="thread-container">
+                                    <div className='thread-signature'>
                                         <img className='avatar' src='https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png' />
                                         <br /> {this.props.oneThread.poster}
                                         <br /> {this.props.oneThread.time_posted.substring(0, 10)}
                                     </div>
-                                    <div className='reply-body'>
-                                        <div id="reply-title">{this.props.oneThread.title}</div>
+                                    <div className='thread-body'>
+                                        <div id="thread-title">{this.props.oneThread.title}</div>
                                         <hr />
                                         {
                                             !this.props.pendingEdits.threadToEdit
-                                            ? <div className="reply-message" dangerouslySetInnerHTML={this.createMarkup(this.props.oneThread.message)}></div>
-                                            : <EditThread
-                                                originalMessage={this.props.oneThread.message}
-                                                originalTitle={this.props.oneThread.title}
-                                                getOneThread={() => this.props.getOneThread(this.props.match.params.threadid)}
+                                                ? <div className="thread-message" dangerouslySetInnerHTML={this.createMarkup(this.props.oneThread.message)}></div>
+                                                : <EditThread
+                                                    originalMessage={this.props.oneThread.message}
+                                                    originalTitle={this.props.oneThread.title}
+                                                    getOneThread={() => this.props.getOneThread(this.props.match.params.threadid)}
                                                 />
                                         }
                                     </div>
-                                    <div className="reply-options">
-                                        <ModalQuote
-                                            quote={this.props.oneThread}
-                                            getReplies={this.props.getReplies}
-                                            toggledTopic={this.props.toggledTopic}
-                                            threadId={this.props.match.params.threadid}
-                                        />
-                                        <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(this.props.oneThread._id) && this.props.handleEdit(event, this.props.oneThread.message, this.props.oneThread.title)}></i>
-                                    </div>
+                                    {
+                                        this.props.user
+                                            ? (
+                                                <div className="thread-options">
+                                                    <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(this.props.oneThread.poster, this.props.oneThread.message)}></i>
+                                                    <ModalQuote
+                                                        quote={this.props.oneThread}
+                                                        getReplies={this.props.getReplies}
+                                                        toggledTopic={this.props.toggledTopic}
+                                                        threadId={this.props.match.params.threadid}
+                                                    />
+                                                    <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(this.props.oneThread._id) && this.props.handleEdit(event, this.props.oneThread.message, this.props.oneThread.title)}></i>
+                                                </div>
+                                            )
+                                            : (
+                                                <div className="thread-options">
+                                                    <i className="fa fa-reply disabled-icon" aria-hidden="true"></i>
+                                                    <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                                </div>
+                                            )
+                                    }
                                 </div>
                             </div>
                             <Replies
@@ -76,7 +86,6 @@ class Thread extends React.Component {
                     )
                     : false
                 }
-
             </div>
         )
     }
@@ -86,7 +95,8 @@ function mapStateToProps(state) {
     return {
         oneThread: state.oneThread,
         toggledTopic: state.toggledTopic,
-        pendingEdits: state.pendingEdits
+        pendingEdits: state.pendingEdits,
+        user: state.user
     }
 }
 
@@ -97,7 +107,8 @@ function matchDispatchToProps(dispatch) {
         toggleTopic: toggleTopic,
         handleNewQuote: handleNewQuote,
         flagThreadEdit: flagThreadEdit,
-        handleEdit: handleEdit
+        handleEdit: handleEdit,
+        getUser: getUser
     }, dispatch)
 }
 

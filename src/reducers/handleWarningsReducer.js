@@ -3,11 +3,15 @@ export default function (state = {
     invalidName: false,
     invalidPassword: false,
     invalidText: false,
+    invalidTitle: false,
+    invalidMessage: false,
     text: {
         invalidUser: 'Invalid username and/or password.',
         invalidName: 'User already exists.',
         invalidPassword: "Passwords do not match.",
-        invalidText: "Username and/or password is incomplete."
+        invalidText: "Username and/or password is incomplete.",
+        invalidTitle: "Invalid title. Please try again.",
+        invalidMessage: "Invalid message. Please try again.",
     }
 }, action) {
     switch (action.type) {

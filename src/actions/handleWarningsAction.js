@@ -14,7 +14,9 @@ export const clearWarnings = () => {
             invalidUser: false,
             invalidName: false,
             invalidPassword: false,
-            invalidText: false
+            invalidText: false,
+            invalidTitle: false,
+            invalidMessage: false
         }
     }
 }

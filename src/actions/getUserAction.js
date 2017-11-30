@@ -10,3 +10,10 @@ export const getUser = () => {
         })
     }
 }
+
+export const resetUser = () => {
+    return {
+        type: "RESET_USER",
+        payload: null
+    }
+}

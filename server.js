@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routes = require('./controller/routes.js');
 var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
 
 // MongoDB Settings
 const target = "starwars_db";
@@ -27,9 +26,6 @@ app.use(session({
     secret: 'work hard',
     resave: true,
     saveUninitialized: false,
-    store: new MongoStore({
-        mongooseConnection: dbConnection
-    })
 }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/build"));

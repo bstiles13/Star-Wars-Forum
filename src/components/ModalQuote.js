@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
+import { handleNewReply } from '../actions/handleNewReplyAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
 
 class ModalQuote extends React.Component {
@@ -21,7 +21,6 @@ class ModalQuote extends React.Component {
     render() {
         return (
             <div>
-                <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(this.props.quote.poster, this.props.quote.message)}></i>
                 <div className="modal fade" id="modal-quote" tabIndex="-1" role="dialog" aria-labelledby="modal-quote" aria-hidden="true">
                     <div className="modal-dialog" role="document">
                         <div className="modal-content">
@@ -61,7 +60,6 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         handleNewReply: handleNewReply,
-        handleNewQuote: handleNewQuote,
         setReplyUser: setReplyUser
     }, dispatch)
 }

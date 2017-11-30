@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getUser } from '../actions/getUserAction.js';
+import { getUser, resetUser } from '../actions/getUserAction.js';
 import logo from '../assets/images/logo.png';
 
 class Navbar extends React.Component {
@@ -16,7 +16,7 @@ class Navbar extends React.Component {
     logout() {
         axios.get('/logout').then(data => {
             console.log('logged out', data.data);
-            this.props.getUser();
+            this.props.resetUser();
             window.location.href = '/';
         })
     }
@@ -55,7 +55,8 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        getUser: getUser
+        getUser: getUser,
+        resetUser: resetUser
     }, dispatch)
 }
 

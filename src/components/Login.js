@@ -9,7 +9,7 @@ class Login extends React.Component {
 
     renderWarning(type) {
         if (this.props.warnings[type]) {
-            return (<div className='login-warning'>{this.props.warnings.text[type]}</div>)
+            return (<div className='warning'>{this.props.warnings.text[type]}</div>)
         }
     }
 

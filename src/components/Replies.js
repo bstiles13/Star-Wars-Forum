@@ -1,10 +1,8 @@
 import React from 'react';
-import axios from 'axios';
-import { Link } from 'react-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getReplies } from '../actions/getRepliesAction.js';
-import { handleNewReply } from '../actions/handleNewReplyAction.js';
+import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
@@ -13,11 +11,11 @@ import { handleEdit } from '../actions/handleEditAction.js';
 import ModalQuote from './ModalQuote';
 import ModalDeleteReply from './ModalDeleteReply';
 import EditReply from './EditReply';
+import NewReply from './NewReply';
 
 class Replies extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.match);
         this.props.setReplyUser(this.props.user);
         this.props.getReplies(this.props.threadId);
         this.props.toggleTopic(this.props.topicId);
@@ -43,26 +41,37 @@ class Replies extends React.Component {
                             <div className='reply-body'>
                                 {
                                     !this.props.pendingEdits.replyToEdit
-                                    ? <span className="reply-message" dangerouslySetInnerHTML={this.createMarkup(reply.message)}></span>
-                                    : <EditReply original={reply.message} getReplies={() => this.props.getReplies(this.props.threadId)}/>
+                                        ? <span className="reply-message" dangerouslySetInnerHTML={this.createMarkup(reply.message)}></span>
+                                        : <EditReply original={reply.message} getReplies={() => this.props.getReplies(this.props.threadId)} />
                                 }
                             </div>
-                            <div className="reply-options">
-                                <ModalQuote
-                                    quote={reply}
-                                    getReplies={this.props.getReplies}
-                                    toggledTopic={this.props.toggledTopic}
-                                    threadId={this.props.threadid}
-                                />
-                                <i className="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.flagReplyRemoval(reply._id)}></i>
-                                <ModalDeleteReply 
-                                    getReplies={() => this.props.getReplies(this.props.threadId)}
-                                    stagedReply={this.props.pendingEdits.stagedReply}
-                                    reset={this.props.reset}
-                                    reply={reply}
-                                />
-                                <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
-                            </div>
+                            {
+                                this.props.user
+                                    ? (
+                                        <div className="reply-options">
+                                            <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(reply.poster, reply.message)}></i>
+                                            <ModalQuote
+                                                quote={reply}
+                                                getReplies={this.props.getReplies}
+                                                toggledTopic={this.props.toggledTopic}
+                                                threadId={this.props.threadid}
+                                            />
+                                            <i className="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.flagReplyRemoval(reply._id)}></i>
+                                            <ModalDeleteReply
+                                                getReplies={() => this.props.getReplies(this.props.threadId)}
+                                                replyToDelete={this.props.pendingEdits.replyToDelete}
+                                                reset={this.props.reset}
+                                                reply={reply}
+                                            />
+                                            <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
+                                        </div>
+                                    )
+                                    : <div className="reply-options">
+                                        <i className="fa fa-reply disabled-icon" aria-hidden="true"></i>
+                                        <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
+                                        <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                    </div>
+                            }
                         </div>
                         <br />
                     </div>
@@ -73,27 +82,14 @@ class Replies extends React.Component {
         }
     }
 
-    submitReply() {
-        axios.post('/newreply', this.props.newReply).then(data => {
-            console.log(data);
-            this.props.getReplies(this.props.threadId);
-        })
-    }
-
     render() {
         return (
             <div id="replies">
                 {this.renderReplies()}
-                <div id='new-reply-container'>
-                    <h5 className="warning">Sign in to leave a reply</h5>
-                    <div className="form-group">
-                        <label className="label" htmlFor="threadPost">Quick Reply:</label>
-                        <textarea type="text" className="form-control" id="threadPost"
-                            placeholder="Share what's on your mind" name="message" onChange={(event) => this.props.handleNewReply(event, this.props.toggledTopic._id, this.props.threadId)}></textarea>
-                    </div>
-                    <button type="submit" className="btn btn-outline-danger" onClick={this.submitReply.bind(this)}>Reply</button>
-                    <span id='signature'> poster </span>
-                </div>
+                <NewReply
+                    handleNewReply={(event) => this.props.handleNewReply(event, this.props.toggledTopic._id, this.props.threadId)}
+                    getReplies={() => this.props.getReplies(this.props.threadId)}
+                />
             </div>
         )
     }
@@ -113,6 +109,7 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         getReplies: getReplies,
         handleNewReply: handleNewReply,
+        handleNewQuote: handleNewQuote,
         toggleTopic: toggleTopic,
         setReplyUser: setReplyUser,
         flagReplyRemoval: flagReplyRemoval,

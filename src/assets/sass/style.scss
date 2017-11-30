@@ -1,6 +1,8 @@
 $customblue: rgb(32, 192, 255);
 $customblack: rgba(0, 0, 0, 0.7);
-
+$customgold: rgb(255, 215, 17);
+$customwhite: rgb(255, 255, 246);
+$customred: rgb(241, 0, 0);
 
 body {
     margin: 0;
@@ -17,7 +19,7 @@ html, body {
   position: absolute;
   min-height: 100%;
   width: 100%;
-  color: gold;
+  color: $customgold;
   // text-align: center;
   background-image: url('../images/background.jpg');
   background-size: cover;
@@ -35,7 +37,7 @@ html, body {
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white;
+  color: $customwhite;
 }
 
 .App-title {
@@ -126,7 +128,7 @@ html, body {
 }
 
 .carousel-caption {
-  color: gold;
+  color: $customgold;
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -158,12 +160,12 @@ html, body {
 
 .topic-row {
   display: flex;
-  border-bottom: 1px solid goldenrod;
+  border-bottom: 1px solid $customgold;
   color: $customblue;
 }
 
 #first-row {
-  color: ivory;
+  color: $customwhite;
 }
 
 .thread-icon {
@@ -172,7 +174,7 @@ html, body {
 }
 
 a {
-  color: rgb(32, 192, 255);
+  color: $customblue;
   font-weight: bolder;
 }
 
@@ -190,7 +192,7 @@ a {
 }
 
 #new-thread-link {
-  color: ivory;
+  color: $customwhite;
   float: right;
 }
 
@@ -210,14 +212,50 @@ a {
 
 // Thread Component
 
-#thread-header {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+.thread {
+  margin-bottom: 10px;
 }
 
-#thread-header > a {
-  color: gold;
+.thread-header {
+  background-color: black;
+  color: $customwhite;
+  font-weight: bold;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.thread-container {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1px solid lightgray;    
+  background-color: $customwhite;
+  width: 100%;
+  padding: 10px 20px;    
+}
+
+.thread-signature {
+  flex: 1;
+  border-right: 1px solid dimgray;
+  padding-right: 10px;
+}
+
+.thread-body {
+  padding: 10px 0 20px 20px;
+  flex: 7;
+}
+
+#thread-title {
+  font-weight: bold;
+}
+
+.thread-message {
+  $customwhite-space: pre-wrap;
+}
+
+.thread-options {
+  flex: 1;
+  display: flex;
+  padding: 10px 0 0 20px;
 }
 
 #break {
@@ -228,24 +266,16 @@ a {
   color: black;
 }
 
-#new-reply-container {
-  padding: 10px 100px;
-  /* background-color: ivory; */
-  border-radius: 2%;
-}
-
 #signature {
   padding-left: 10px;
-  color: ivory;
+  color: $customwhite;
 }
 
 .label {
-  color: gold;
+  color: $customgold;
 }
 
-.warning {
-  color: rgba(221, 0, 44, 0.473);
-}
+// Replies Component
 
 .reply {
   margin-bottom: 10px;
@@ -253,7 +283,7 @@ a {
 
 .reply-header {
   background-color: black;
-  color: white;
+  color: $customwhite;
   font-weight: bold;
   width: 100%;
   padding: 0 10px;
@@ -263,7 +293,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid lightgray;    
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: $customwhite;
   width: 100%;
   padding: 10px 20px;    
 }
@@ -284,11 +314,12 @@ a {
 }
 
 .reply-message {
-  white-space: pre-wrap;
+  $customwhite-space: pre-wrap;
 }
 
 .reply-options {
   flex: 1;
+  display: flex;
   padding: 10px 0 0 20px;
 }
 
@@ -297,21 +328,12 @@ a {
   height: auto;
 }
 
-.fa-trash {
-  color: red;
-  font-size: 20px;
-}
-
-.fa-trash:hover {
-  cursor: pointer;
-}
-
 .quote {
   color: black;
   border-top: 1px solid black;
   border-left: 1px solid black;
-  border-right: 0.1px solid gainsboro;
-  border-bottom: 0.1px solid gainsboro;
+  border-right: 0.1px solid $customwhite;
+  border-bottom: 0.1px solid $customwhite;
   margin-bottom: 10px;
   padding: 5px;
 }
@@ -325,10 +347,11 @@ a {
   overflow: auto;
 }
 
-.option-icon {
-  margin: 5px;
-  cursor: pointer;
-  font-size: 30px;
+// NewReply Component
+
+#new-reply {
+  padding: 10px 100px;
+  border-radius: 2%;
 }
 
 // Navbar
@@ -377,20 +400,20 @@ a {
 }
 
 .nav-link {
-  color: gold;
+  color: $customgold;
 }
 
 a:not([href]) {
-  color: gold;
+  color: $customgold;
 }
 
 .nav-link:hover {
-  color: white;
+  color: $customwhite;
   background-color: rgb(110, 97, 97);
 }
 
 a:not([href]):hover {
-  color: white;
+  color: $customwhite;
   cursor: pointer;
 }
 
@@ -406,21 +429,21 @@ a:not([href]):hover {
 
 #breadcrumb {
   display: flex;
-  color: gold;
+  color: $customgold;
   margin-bottom: 15px;
 }
 
 .breadcrumb-link {
-  color: gold;
+  color: $customgold;
 }
 
 .breadcrumb-static {
-  color: ivory;
+  color: $customwhite;
   font-weight: bold;
 }
 
 .break {
-  color: gold;
+  color: $customgold;
   margin: 0 10px;
 }
 
@@ -438,7 +461,7 @@ a:not([href]):hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  border-bottom: 1px solid rgb(32, 192, 255);
+  border-bottom: 1px solid $customblue;
   padding-bottom: 30px;
   margin-bottom: 30px;
 }
@@ -451,12 +474,40 @@ a:not([href]):hover {
   display: none;
 }
 
-.warning {
-  color: red;
-  font-weight: bold;
-  margin-bottom: 10px;
+.custom-color {
+  color: $customwhite;    
 }
 
-.custom-color {
-  color: ivory;    
+// Utilities
+
+.fa-trash {
+  color: $customred;
+  font-size: 20px;
+}
+
+.fa-trash:hover {
+  cursor: pointer;
+}
+
+.option-icon {
+  margin: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.disabled-icon {
+  margin: 5px;
+  font-size: 20px;  
+  color: rgb(167, 165, 165);
+}
+
+.warning {
+  color: $customred;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.warning-color {
+  color: $customred;
 }

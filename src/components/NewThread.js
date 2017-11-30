@@ -2,34 +2,51 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { handleNewThread } from '../actions/handleNewThreadAction.js';
+import { getTopics } from '../actions/getTopicsAction.js';
+import { handleNewThread, resetNewThread } from '../actions/handleNewThreadAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
+import { handleWarning, clearWarnings } from '../actions/handleWarningsAction.js';
 
 class NewThread extends React.Component {
 
     renderOptions() {
         let topics = this.props.topics;
-        return topics.map((topic, index) => {
-            return <option key={index} value={topic._id} selected={this.props.match.params.id == topic.order ? true : false}>{topic.topic}</option>
-        })
+        if (topics) {
+            return topics.map((topic, index) => {
+                return <option key={index} value={topic._id} selected={this.props.match.params.id == topic.order ? true : false}>{topic.topic}</option>
+            })
+        }
+    }
+
+    renderWarning(type) {
+        if (this.props.warnings[type]) {
+            return (<div className='warning'>{this.props.warnings.text[type]}</div>)
+        }
     }
 
     componentDidMount() {
-        this.props.setThreadUser(this.props.user);        
+        this.props.getTopics();        
+        this.props.setThreadUser(this.props.user);
         this.props.toggleTopic(this.props.match.params.id);
     }
 
     submitThread() {
+        this.props.clearWarnings();
+        if (this.props.newThread.title == '' || this.props.newThread.title == null) return this.props.handleWarning('invalidTitle');
+        if (this.props.newThread.message == '' || this.props.newThread.message == null) return this.props.handleWarning('invalidMessage');
         axios.post('/newthread', this.props.newThread).then(data => {
             console.log('new thread success', data);
-            this.props.history.push('/thread/' + this.props.match.params.id + '/' + data.data._id);          
+            this.props.resetNewThread();
+            this.props.history.push('/thread/' + this.props.match.params.id + '/' + data.data._id);
         })
     }
 
     render() {
         return (
             <div id="new-thread">
+                {this.renderWarning('invalidTitle')}
+                {this.renderWarning('invalidMessage')}
                 <form>
                     <div className="form-group">
                         <label htmlFor="form-topic">Topic</label>
@@ -57,15 +74,20 @@ function mapStateToProps(state) {
         topics: state.topics,
         newThread: state.newThread,
         toggledTopic: state.toggledTopic,
-        user: state.user
+        user: state.user,
+        warnings: state.warnings
     }
 }
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
+        getTopics: getTopics,
         handleNewThread: handleNewThread,
+        resetNewThread: resetNewThread,
         toggleTopic: toggleTopic,
-        setThreadUser: setThreadUser
+        setThreadUser: setThreadUser,
+        handleWarning: handleWarning,
+        clearWarnings: clearWarnings
     }, dispatch)
 }
 

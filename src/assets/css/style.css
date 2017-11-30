@@ -11,7 +11,7 @@ html, body {
   position: absolute;
   min-height: 100%;
   width: 100%;
-  color: gold;
+  color: #ffd711;
   background-image: url("../images/background.jpg");
   background-size: cover;
   background-attachment: scroll;
@@ -26,7 +26,7 @@ html, body {
   background-color: #222;
   height: 150px;
   padding: 20px;
-  color: white; }
+  color: #fffff6; }
 
 .App-title {
   font-size: 1.5em; }
@@ -97,7 +97,7 @@ html, body {
   min-width: 50%; }
 
 .carousel-caption {
-  color: gold;
+  color: #ffd711;
   background-color: rgba(0, 0, 0, 0.4); }
 
 #loader {
@@ -124,11 +124,11 @@ html, body {
 
 .topic-row {
   display: flex;
-  border-bottom: 1px solid goldenrod;
+  border-bottom: 1px solid #ffd711;
   color: #20c0ff; }
 
 #first-row {
-  color: ivory; }
+  color: #fffff6; }
 
 .thread-icon {
   height: 40px;
@@ -149,7 +149,7 @@ a {
   font-size: 14px; }
 
 #new-thread-link {
-  color: ivory;
+  color: #fffff6;
   float: right; }
 
 #new-thread-button {
@@ -162,13 +162,40 @@ a {
   background-color: rgba(0, 0, 0, 0.7);
   padding: 20px; }
 
-#thread-header {
+.thread {
+  margin-bottom: 10px; }
+
+.thread-header {
+  background-color: black;
+  color: #fffff6;
+  font-weight: bold;
+  width: 100%;
+  padding: 0 10px; }
+
+.thread-container {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 20px; }
+  border-top: 1px solid lightgray;
+  background-color: #fffff6;
+  width: 100%;
+  padding: 10px 20px; }
 
-#thread-header > a {
-  color: gold; }
+.thread-signature {
+  flex: 1;
+  border-right: 1px solid dimgray;
+  padding-right: 10px; }
+
+.thread-body {
+  padding: 10px 0 20px 20px;
+  flex: 7; }
+
+#thread-title {
+  font-weight: bold; }
+
+.thread-options {
+  flex: 1;
+  display: flex;
+  padding: 10px 0 0 20px; }
 
 #break {
   margin: 0 10px; }
@@ -176,27 +203,19 @@ a {
 #thread {
   color: black; }
 
-#new-reply-container {
-  padding: 10px 100px;
-  /* background-color: ivory; */
-  border-radius: 2%; }
-
 #signature {
   padding-left: 10px;
-  color: ivory; }
+  color: #fffff6; }
 
 .label {
-  color: gold; }
-
-.warning {
-  color: rgba(221, 0, 44, 0.473); }
+  color: #ffd711; }
 
 .reply {
   margin-bottom: 10px; }
 
 .reply-header {
   background-color: black;
-  color: white;
+  color: #fffff6;
   font-weight: bold;
   width: 100%;
   padding: 0 10px; }
@@ -205,7 +224,7 @@ a {
   display: flex;
   flex-wrap: wrap;
   border-top: 1px solid lightgray;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: #fffff6;
   width: 100%;
   padding: 10px 20px; }
 
@@ -221,30 +240,21 @@ a {
 #reply-title {
   font-weight: bold; }
 
-.reply-message {
-  white-space: pre-wrap; }
-
 .reply-options {
   flex: 1;
+  display: flex;
   padding: 10px 0 0 20px; }
 
 .avatar {
   width: 70px;
   height: auto; }
 
-.fa-trash {
-  color: red;
-  font-size: 20px; }
-
-.fa-trash:hover {
-  cursor: pointer; }
-
 .quote {
   color: black;
   border-top: 1px solid black;
   border-left: 1px solid black;
-  border-right: 0.1px solid gainsboro;
-  border-bottom: 0.1px solid gainsboro;
+  border-right: 0.1px solid #fffff6;
+  border-bottom: 0.1px solid #fffff6;
   margin-bottom: 10px;
   padding: 5px; }
 
@@ -255,10 +265,9 @@ a {
   font-style: italic;
   overflow: auto; }
 
-.option-icon {
-  margin: 5px;
-  cursor: pointer;
-  font-size: 30px; }
+#new-reply {
+  padding: 10px 100px;
+  border-radius: 2%; }
 
 #navbar {
   height: 200px;
@@ -297,17 +306,17 @@ a {
   border-radius: 10px 10px 0 0; }
 
 .nav-link {
-  color: gold; }
+  color: #ffd711; }
 
 a:not([href]) {
-  color: gold; }
+  color: #ffd711; }
 
 .nav-link:hover {
-  color: white;
+  color: #fffff6;
   background-color: #6e6161; }
 
 a:not([href]):hover {
-  color: white;
+  color: #fffff6;
   cursor: pointer; }
 
 #logo {
@@ -319,18 +328,18 @@ a:not([href]):hover {
 
 #breadcrumb {
   display: flex;
-  color: gold;
+  color: #ffd711;
   margin-bottom: 15px; }
 
 .breadcrumb-link {
-  color: gold; }
+  color: #ffd711; }
 
 .breadcrumb-static {
-  color: ivory;
+  color: #fffff6;
   font-weight: bold; }
 
 .break {
-  color: gold;
+  color: #ffd711;
   margin: 0 10px; }
 
 #login {
@@ -354,10 +363,31 @@ a:not([href]):hover {
 .login-label {
   display: none; }
 
-.warning {
-  color: red;
-  font-weight: bold;
-  margin-bottom: 10px; }
-
 .custom-color {
-  color: ivory; }
+  color: #fffff6; }
+
+.fa-trash {
+  color: #f10000;
+  font-size: 20px; }
+
+.fa-trash:hover {
+  cursor: pointer; }
+
+.option-icon {
+  margin: 5px;
+  cursor: pointer;
+  font-size: 20px; }
+
+.disabled-icon {
+  margin: 5px;
+  font-size: 20px;
+  color: #a7a5a5; }
+
+.warning {
+  color: #f10000;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center; }
+
+.warning-color {
+  color: #f10000; }

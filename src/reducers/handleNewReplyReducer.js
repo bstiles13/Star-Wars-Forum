@@ -10,6 +10,9 @@ export default function (state = {
         case "HANDLE_NEW_REPLY":
             state = { ...state, ...action.payload }
             break;
+        case "RESET_NEW_REPLY":
+            return action.payload
+            break;
     }
     return state;
 }

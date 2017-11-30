@@ -23,3 +23,10 @@ export const handleEdit = (event, originalMessage, originalTitle) => {
         }
     }
 }
+
+export const resetEdit = () => {
+    return {
+        type: 'RESET_EDIT',
+        payload: null
+    }
+}
