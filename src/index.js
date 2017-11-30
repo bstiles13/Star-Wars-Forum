@@ -13,7 +13,7 @@ let middleware = applyMiddleware(thunk);
 let store = createStore(reducers, middleware);
 
 store.subscribe(() => {
-    // console.log("store update:", store.getState())
+    console.log("store update:", store.getState())
 })
 
 ReactDOM.render(

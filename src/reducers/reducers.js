@@ -12,6 +12,7 @@ import handleWarningsReducer from './handleWarningsReducer.js';
 import getUserReducer from './getUserReducer.js';
 import editReducer from './editReducer.js';
 import handleEditReducer from './handleEditReducer.js';
+import getStatsReducer from './getStatsReducer.js';
 
 let reducers = combineReducers({
     articles: getArticlesReducer,
@@ -26,7 +27,8 @@ let reducers = combineReducers({
     warnings: handleWarningsReducer,
     pendingEdits: editReducer,
     user: getUserReducer,
-    edit: handleEditReducer
+    edit: handleEditReducer,
+    stats: getStatsReducer
 })
 
 export default reducers;

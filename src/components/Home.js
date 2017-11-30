@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Statistics from './Statistics';
 import Articles from './Articles';
 import Tweets from './Tweets';
 
@@ -10,8 +11,7 @@ class Home extends React.Component {
             <div id="home">
                 <div id="home-content">
                     <div id="statistics-container">
-                        <div id="recent-activity"></div>
-                        <div id="forum-statistics"></div>
+                        <Statistics />
                     </div>
                     <div id="news-container">
                         <Articles />

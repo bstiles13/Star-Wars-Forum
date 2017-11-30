@@ -31,6 +31,12 @@ router.post('/editreply', controller.editReply);
 
 router.get('/lastpost/:id', controller.lastPost);
 
+router.get('/usercount', controller.userCount);
+
+router.get('/threadcount', controller.threadCount);
+
+router.get('/replycount', controller.replyCount);
+
 // this route is just used to get the user basic info
 router.get('/getuser', controller.getUser);
 

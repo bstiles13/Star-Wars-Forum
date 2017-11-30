@@ -151,6 +151,30 @@ module.exports = {
             res.json(data);
         })
     },
+
+    userCount: (req, res) => {
+        User.find({}).then(data => {
+            res.json({count: data.length})
+        }).catch(err => {
+            throw err;
+        })
+    },
+
+    threadCount: (req, res) => {
+        Thread.find({}).then(data => {
+            res.json({count: data.length})
+        }).catch(err => {
+            throw err;
+        })
+    },
+
+    replyCount: (req, res) => {
+        Reply.find({}).then(data => {
+            res.json({count: data.length})
+        }).catch(err => {
+            throw err;
+        })
+    },
     
     // this route is just used to get the user basic info
     getUser: (req, res, next) => {
