@@ -51,6 +51,7 @@ class Articles extends React.Component {
         return (
             <div id="articles">
                 {
+                    // If API returned articles then render carousel
                     this.props.articles != null
                         ? (
                             <div id="article-carousel" className="carousel slide" data-ride="carousel">
@@ -79,6 +80,7 @@ class Articles extends React.Component {
                                 </a>
                             </div>
                         )
+                        // If API is loading articles or failed then show spinner loader
                         : <Loader />
                 }
             </div>
@@ -87,9 +89,7 @@ class Articles extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        articles: state.articles
-    }
+    return { articles: state.articles }
 }
 
 function matchDispatchToProps(dispatch) {

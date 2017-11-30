@@ -60,9 +60,7 @@ class Statistics extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        stats: state.stats
-    }
+    return { stats: state.stats }
 }
 
 function matchDispatchToProps(dispatch) {

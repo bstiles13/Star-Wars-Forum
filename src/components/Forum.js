@@ -65,9 +65,7 @@ class Forum extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {
-        topics: state.topics
-    }
+    return { topics: state.topics }
 }
 
 function matchDispatchToProps(dispatch) {

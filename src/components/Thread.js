@@ -30,29 +30,30 @@ class Thread extends React.Component {
     }
 
     render() {
+        let thread = this.props.oneThread;
         return (
             <div>
-                {this.props.oneThread != null
+                {thread != null
                     ? (
                         <div id="thread">
-                            <Breadcrumb topic={this.props.toggledTopic} thread={this.props.oneThread.title} />
+                            <Breadcrumb topic={this.props.toggledTopic} thread={thread.title} />
                             <div className="thread">
                                 <div className="thread-header">Thread</div>
                                 <div className="thread-container">
                                     <div className='thread-signature'>
                                         <img className='avatar' src='https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png' />
-                                        <br /> {this.props.oneThread.poster}
-                                        <br /> {this.props.oneThread.time_posted.substring(0, 10)}
+                                        <br /> {thread.poster}
+                                        <br /> {thread.time_posted.substring(0, 10)}
                                     </div>
                                     <div className='thread-body'>
-                                        <div id="thread-title">{this.props.oneThread.title}</div>
+                                        <div id="thread-title">{thread.title}</div>
                                         <hr />
                                         {
                                             !this.props.pendingEdits.threadToEdit
-                                                ? <div className="thread-message" dangerouslySetInnerHTML={this.createMarkup(this.props.oneThread.message)}></div>
+                                                ? <div className="thread-message" dangerouslySetInnerHTML={this.createMarkup(thread.message)}></div>
                                                 : <EditThread
-                                                    originalMessage={this.props.oneThread.message}
-                                                    originalTitle={this.props.oneThread.title}
+                                                    originalMessage={thread.message}
+                                                    originalTitle={thread.title}
                                                     getOneThread={() => this.props.getOneThread(this.props.match.params.threadid)}
                                                 />
                                         }
@@ -61,16 +62,16 @@ class Thread extends React.Component {
                                         this.props.user
                                             ? (
                                                 <div className="thread-options">
-                                                    <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(this.props.oneThread.poster, this.props.oneThread.message)}></i>
+                                                    <i className="fa fa-reply option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-quote" onClick={() => this.props.handleNewQuote(thread.poster, thread.message)}></i>
                                                     <ModalQuote
-                                                        quote={this.props.oneThread}
+                                                        quote={thread}
                                                         getReplies={this.props.getReplies}
                                                         toggledTopic={this.props.toggledTopic}
                                                         threadId={this.props.match.params.threadid}
                                                     />
                                                     {
-                                                        this.props.user == this.props.oneThread.poster && this.props.user != 'Anonymous'
-                                                        ? <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(this.props.oneThread._id) && this.props.handleEdit(event, this.props.oneThread.message, this.props.oneThread.title)}></i>
+                                                        this.props.user == thread.poster && this.props.user != 'Anonymous'
+                                                        ? <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(thread._id) && this.props.handleEdit(event, thread.message, thread.title)}></i>
                                                         : <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
                                                     }
                                                 </div>

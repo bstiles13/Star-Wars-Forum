@@ -7,6 +7,36 @@ let User = require('../model/user.js');
 
 module.exports = {
 
+    // Retrieves Star Wars articles from New York Times API dated within last month
+    articles: (req, res) => {
+        let date = moment().subtract(40, 'days').format('YYYYMMDD');
+        let query = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=star+wars&begin_date=" + date + "&api-key=57828338a1d747908e089f87cc6a7a77"
+        // Send GET request to New York Times and add resulting collection to "articles" object to be returned to browser
+        axios.get(query).then(data => {
+            res.json(data.data.response);
+        })
+    },
+
+    // Retrieves a single forum topic by ID
+    topic: (req, res) => {
+        var id = req.params.id;
+        Topic.findOne({ _id: id }).then(data => {
+            res.json(data);
+        }).catch(err => {
+            throw err;
+        })
+    },
+
+    // Retrieves a single forum topic by Order #
+    topicDetail: (req, res) => {
+        Topic.findOne({ order: req.params.id }).then(data => {
+            res.json(data);
+        }).catch(err => {
+            throw err;
+        })
+    },
+
+    // Retrieves all forum topics for display on homepage
     topics: (req, res) => {
         Topic.aggregate([
             {
@@ -33,7 +63,18 @@ module.exports = {
             throw err;
         })
     },
-    
+
+    // Retrieves a single thread by ID
+    thread: (req, res) => {
+        var id = req.params.id;
+        Thread.findOne({ _id: id }).then(data => {
+            res.json(data);
+        }).catch(err => {
+            throw err;
+        })
+    },
+
+    // Retrieves all threads by topic Order
     threads: (req, res) => {
         Topic.findOne({ order: req.params.id }).then(data => {
             Thread.aggregate([
@@ -56,7 +97,8 @@ module.exports = {
             })
         })
     },
-    
+
+    // Retrieves all replies by thread ID
     replies: (req, res) => {
         Reply.find({ thread_id: req.params.id }).then(data => {
             res.json(data);
@@ -64,64 +106,8 @@ module.exports = {
             throw err;
         })
     },
-    
-    deleteReply: (req, res) => {
-        Reply.remove({ _id: req.params.id }).then(data => {
-            res.json(data);
-        }).catch(err => {
-            res.json(err);
-        });
-    },
-    
-    thread: (req, res) => {
-        console.log('getting thread');
-        var id = req.params.id;
-        Thread.findOne({ _id: id }).then(data => {
-            console.log(data);
-            res.json(data);
-        }).catch(err => {
-            throw err;
-        })
-    },
 
-    topic: (req, res) => {
-        var id = req.params.id;
-        Topic.findOne({ _id: id }).then(data => {
-            res.json(data);
-        }).catch(err => {
-            throw err;
-        })
-    },
-    
-    deleteThread: (req, res) => {
-        Thread.remove({ _id: req.params.id }).then(data => {
-            Reply.remove({ thread_id: req.params.id }).then(data => {
-                res.json(data);
-            }).catch(err => {
-                res.json(err);
-            });
-        }).catch(err => {
-            res.json(err);
-        });
-    },
-    
-    topicDetail: (req, res) => {
-        Topic.findOne({ order: req.params.id }).then(data => {
-            res.json(data);
-        }).catch(err => {
-            throw err;
-        })
-    },
-    
-    articles: (req, res) => {
-        let date = moment().subtract(40, 'days').format('YYYYMMDD');
-        let query = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=star+wars&begin_date=" + date + "&api-key=57828338a1d747908e089f87cc6a7a77"
-        // Send GET request to New York Times and add resulting collection to "articles" object to be returned to browser
-        axios.get(query).then(data => {
-            res.json(data.data.response);
-        })
-    },
-    
+    // Handles new thread
     newThread: (req, res) => {
         let newThread = req.body;
         Thread.create(newThread).then(data => {
@@ -130,7 +116,8 @@ module.exports = {
             console.log(err);
         })
     },
-    
+
+    // Handles new reply
     newReply: (req, res) => {
         let newReply = req.body;
         if (newReply.quotedPoster != null) {
@@ -142,7 +129,8 @@ module.exports = {
             console.log(err);
         })
     },
-    
+
+    // Handles thread update
     editThread: (req, res) => {
         Thread.update({ _id: req.body.id }, { title: req.body.title, message: req.body.message }).then(data => {
             res.json(data);
@@ -150,7 +138,8 @@ module.exports = {
             throw err;
         })
     },
-    
+
+    // Handles reply update
     editReply: (req, res) => {
         Reply.update({ _id: req.body.id }, { message: req.body.message }).then(data => {
             res.json(data);
@@ -158,42 +147,67 @@ module.exports = {
             throw err;
         })
     },
-    
-    lastReply: (req, res) => {
-        Reply.find().limit(1).sort({$natural:-1})
-        .then(data => {
-            console.log('data', data);
+
+    // Handles reply delete
+    deleteReply: (req, res) => {
+        Reply.remove({ _id: req.params.id }).then(data => {
             res.json(data);
         }).catch(err => {
-            throw err;
-        })
+            res.json(err);
+        });
     },
 
+    // Handles thread delete
+    deleteThread: (req, res) => {
+        Thread.remove({ _id: req.params.id }).then(data => {
+            Reply.remove({ thread_id: req.params.id }).then(data => {
+                res.json(data);
+            }).catch(err => {
+                res.json(err);
+            });
+        }).catch(err => {
+            res.json(err);
+        });
+    },
+
+    // Retrieves most recent post
+    lastReply: (req, res) => {
+        Reply.find().limit(1).sort({ $natural: -1 })
+            .then(data => {
+                res.json(data);
+            }).catch(err => {
+                throw err;
+            })
+    },
+
+    // Retreives total number of users
     userCount: (req, res) => {
         User.find({}).then(data => {
-            res.json({count: data.length})
+            res.json({ count: data.length })
         }).catch(err => {
             throw err;
         })
     },
 
+    // Retreives total number of threads
     threadCount: (req, res) => {
         Thread.find({}).then(data => {
-            res.json({count: data.length})
+            res.json({ count: data.length })
         }).catch(err => {
             throw err;
         })
     },
 
+    // Retreives total number of replies
     replyCount: (req, res) => {
         Reply.find({}).then(data => {
-            res.json({count: data.length})
+            res.json({ count: data.length })
         }).catch(err => {
             throw err;
         })
     },
-    
-    // this route is just used to get the user basic info
+
+    // Retrieves user (if any) stored in express session
     getUser: (req, res, next) => {
         if (req.session.username) {
             return res.json({ user: req.session.username })
@@ -201,7 +215,8 @@ module.exports = {
             return res.json({ user: null })
         }
     },
-    
+
+    // Authenticates existing user
     login: (req, res) => {
         User.authenticate(req.body.existingUsername, req.body.existingPassword, (error, user) => {
             if (error || !user) {
@@ -215,12 +230,14 @@ module.exports = {
             }
         });
     },
-    
+
+    // Sets express session user to Anonymous; guest login
     guest: (req, res) => {
         req.session.username = 'Anonymous';
         res.json(req.session.username);
     },
-    
+
+    // Registers new user and stores user in session if successful
     register: (req, res) => {
         const { newUsername, newPassword1 } = req.body
         // ADD VALIDATION
@@ -240,7 +257,8 @@ module.exports = {
             })
         })
     },
-    
+
+    // Resets user session
     logout: (req, res) => {
         if (req.session.username) {
             req.session.username = null;
@@ -249,5 +267,5 @@ module.exports = {
             res.json({ msg: 'no user to log out!' })
         }
     }
-    
+
 }
