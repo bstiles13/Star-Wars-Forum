@@ -21,7 +21,10 @@ class Articles extends React.Component {
                             <img className="carousel-image" src={url} alt="..." />
                             <div className="carousel-caption">
                                 <h3>{article.headline.main}</h3>
-                                <p>{article.snippet}</p>
+                                <p>
+                                    {article.snippet}
+                                    <a className="caption-url" href={article.web_url} target="_blank">Read More</a>
+                                </p>
                             </div>
                         </div>
                     )
@@ -30,8 +33,11 @@ class Articles extends React.Component {
                         <div className="carousel-item" key={index}>
                             <img className="carousel-image" src={url} alt="..." />
                             <div className="carousel-caption">
-                                <h3>{article.headline.main}</h3>
-                                <p>{article.snippet}</p>
+                                <h3 className="caption-header">{article.headline.main}</h3>
+                                <p>
+                                    {article.snippet}
+                                    <a className="caption-url" href={article.web_url} target="_blank">Read More</a>
+                                </p>
                             </div>
                         </div>
                     )
@@ -72,7 +78,7 @@ class Articles extends React.Component {
                                 </a>
                             </div>
                         )
-                        : <Loader/>
+                        : <Loader />
                 }
             </div>
         )

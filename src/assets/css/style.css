@@ -60,7 +60,9 @@ html, body {
   margin-right: 20px; }
 
 #news-container {
-  flex: 3; }
+  flex: 3;
+  border-radius: 1%;
+  overflow: hidden; }
 
 #news-content {
   display: flex;
@@ -68,6 +70,8 @@ html, body {
 
 #news-header {
   background-color: black;
+  color: #fffff6;
+  font-weight: bold;
   padding: 10px 20px;
   margin-bottom: 0;
   text-align: center; }
@@ -75,23 +79,37 @@ html, body {
 #recent-activity, #forum-statistics {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  border-radius: 3%;
+  overflow: hidden; }
 
 #recent-reply {
   font-family: 'Raleway', 'sans-serif';
-  color: #fffff6;
-  font-size: 16px; }
+  font-size: 20px; }
 
 #recent-poster {
-  color: #fffff6;
   font-size: 13px; }
+
+#recent-thread {
+  margin: 10px 0;
+  float: right;
+  color: #fffff6; }
 
 .stats-header {
   background-color: black;
+  color: #fffff6;
+  font-weight: bold;
   padding: 10px 20px; }
 
 .stats-body {
-  padding: 10px 20px; }
+  padding: 0 30px 20px 30px; }
+
+.count-row {
+  display: flex;
+  justify-content: space-between; }
+
+.count-name {
+  color: #20c0ff; }
 
 #tweets {
   flex: 1; }
@@ -100,7 +118,7 @@ html, body {
   flex: 2; }
 
 #article-carousel {
-  height: 600px; }
+  height: 500px; }
 
 .carousel-inner, .carousel-item {
   height: 100%;
@@ -115,7 +133,17 @@ html, body {
 
 .carousel-caption {
   color: #ffd711;
-  background-color: rgba(0, 0, 0, 0.4); }
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 30px;
+  border-radius: 1%; }
+
+.caption-header {
+  color: #fffff6; }
+
+.caption-url {
+  color: #20c0ff;
+  margin-left: 5px;
+  font-size: 14px; }
 
 #loader {
   border: 16px solid #f3f3f3;

@@ -30,9 +30,9 @@ class Statistics extends React.Component {
                             stats.lastTopic
                                 ? (
                                     <div>
-                                        <Link to={'/thread/' + stats.lastTopic.order + '/' + stats.lastThread._id} id="recent-thread">{stats.lastTopic.topic}</Link>
                                         <div id="recent-reply">"{this.renderPost(stats.lastReply.message)}"</div>
                                         <div id="recent-poster">by {stats.lastReply.poster} on {stats.lastReply.time_posted.substring(0, 10)}</div>
+                                        <div id="recent-thread">... more in <Link to={'/thread/' + stats.lastTopic.order + '/' + stats.lastThread._id}>{stats.lastTopic.topic}</Link></div>
                                     </div>
                                 )
                                 : false
@@ -42,9 +42,15 @@ class Statistics extends React.Component {
                 <div id="forum-statistics">
                     <h6 className="stats-header">Forum Statistics</h6>
                     <div className="stats-body">
-                        <div>Threads: {this.props.stats.threadCount}</div>
-                        <div>Posts: {this.props.stats.replyCount}</div>
-                        <div>Users: {this.props.stats.userCount}</div>
+                        <div className="count-row">
+                            <span className="count-name">Threads:</span><span clasName="count-number">{this.props.stats.threadCount}</span>
+                        </div>
+                        <div className="count-row">
+                            <span className="count-name">Posts:</span><span clasName="count-number">{this.props.stats.replyCount}</span>
+                        </div>
+                        <div className="count-row">
+                            <span className="count-name">Users:</span><span clasName="count-number">{this.props.stats.userCount}</span>
+                        </div>
                     </div>
                 </div>
             </div>

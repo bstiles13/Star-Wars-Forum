@@ -12,7 +12,7 @@ class Tweets extends React.Component {
                     }}
                     options={{
                         username: 'starwars',
-                        height: '600'
+                        height: '500'
                     }}
                 />
             </div>

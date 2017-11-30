@@ -80,6 +80,8 @@ html, body {
 
 #news-container {
   flex: 3;
+  border-radius: 1%;
+  overflow: hidden;
 }
 
 #news-content {
@@ -89,6 +91,8 @@ html, body {
 
 #news-header {
   background-color: black;
+  color: $customwhite;
+  font-weight: bold;    
   padding: 10px 20px;
   margin-bottom: 0;
   text-align: center;
@@ -100,34 +104,49 @@ html, body {
   width: 100%;
   background-color: $customblack;
   margin-bottom: 30px;
+  border-radius: 3%;
+  overflow: hidden;
 }
 
 #recent-activity {
   // text-align: center;
 }
 
-#recent-thread {
-
-}
-
 #recent-reply {
   font-family: 'Raleway', 'sans-serif';
-  color: $customwhite;
-  font-size: 16px;
+  // color: $customwhite;
+  font-size: 20px;
 }
 
 #recent-poster {
-  color: $customwhite;
+  // color: $customwhite;
   font-size: 13px;
+}
+
+#recent-thread {
+  margin: 10px 0;
+  float: right;
+  color: $customwhite;
 }
 
 .stats-header {
   background-color: black;
+  color: $customwhite;
+  font-weight: bold;  
   padding: 10px 20px;
 }
 
 .stats-body {
-  padding: 10px 20px;  
+  padding: 0 30px 20px 30px;  
+}
+
+.count-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.count-name {
+  color: $customblue;
 }
 
 // Tweets Component
@@ -143,7 +162,7 @@ html, body {
 }
 
 #article-carousel {
-  height: 600px;
+  height: 500px;
 }
 
 .carousel-inner, .carousel-item {
@@ -161,7 +180,19 @@ html, body {
 
 .carousel-caption {
   color: $customgold;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px 30px;
+  border-radius: 1%;
+}
+
+.caption-header {
+  color: $customwhite;
+}
+
+.caption-url {
+  color: $customblue;
+  margin-left: 5px;
+  font-size: 14px;
 }
 
 // Loader Component
