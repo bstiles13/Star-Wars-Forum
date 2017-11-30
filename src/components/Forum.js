@@ -30,7 +30,7 @@ class Forum extends React.Component {
                                 topic.replyHistory.length > 0
                                     ? (
                                         <div>
-                                            <div><Link to={'/thread/' + topic.order + '/' + topic.recent.thread_id}>{topic.recent.title}</Link></div>
+                                            <div><Link to={'/thread/' + topic.order + '/' + topic.recent.thread_id}>{topic.recent.title.substring(0, 20) + "..."}</Link></div>
                                             <div className="forum-signature">by {topic.recent.poster} on {topic.recent.time.substring(0, 10)} </div>
                                         </div>
                                     )
@@ -50,7 +50,7 @@ class Forum extends React.Component {
             <div id="forum">
                 <Breadcrumb />
                 <ul className="list-group">
-                    <li className="list-group-item topic-row" id="first-row">
+                    <li className="list-group-item forum-row" id="first-row">
                         <div className="list-child flex-left"><i className="fa fa-sort" aria-hidden="true"></i></div>
                         <div className="list-child flex-center">Topic</div>
                         <div className="list-child flex-right">Last Post</div>
