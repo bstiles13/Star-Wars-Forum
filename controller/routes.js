@@ -6,7 +6,7 @@ let moment = require('moment');
 let Topic = require('../model/topic.js');
 let Thread = require('../model/thread.js');
 let Reply = require('../model/reply.js');
-let User = require('../model/User.js');
+let User = require('../model/user.js');
 
 // Sends topics to homepage for display
 router.get('/topics', (req, res) => {
