@@ -15,6 +15,8 @@ router.get('/deletereply/:id', controller.deleteReply);
 
 router.get('/thread/:id', controller.thread);
 
+router.get('/topic/:id', controller.topic);
+
 router.get('/deletethread/:id', controller.deleteThread);
 
 router.get('/topicdetail/:id', controller.topicDetail);
@@ -29,7 +31,7 @@ router.post('/editthread', controller.editThread);
 
 router.post('/editreply', controller.editReply);
 
-router.get('/lastpost/:id', controller.lastPost);
+router.get('/lastreply', controller.lastReply);
 
 router.get('/usercount', controller.userCount);
 

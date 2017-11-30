@@ -14,11 +14,12 @@ class Home extends React.Component {
                         <Statistics />
                     </div>
                     <div id="news-container">
-                        <Articles />
-                        <Tweets />
+                        <h6 id="news-header">Featured News</h6>
+                        <div id="news-content">
+                            <Articles />
+                            <Tweets />
+                        </div>
                     </div>
-                    {/* <h5 id="news-header">Featured News</h5> */}
-
                 </div>
 
             </div>

@@ -80,22 +80,54 @@ html, body {
 
 #news-container {
   flex: 3;
+}
+
+#news-content {
   display: flex;
   flex-wrap: wrap;
 }
 
 #news-header {
-  padding: 15px 0;
-  margin-bottom: 0;
   background-color: black;
+  padding: 10px 20px;
+  margin-bottom: 0;
   text-align: center;
 }
 
+//Statistics Component
+
 #recent-activity, #forum-statistics {
-  height: 300px;
   width: 100%;
   background-color: $customblack;
   margin-bottom: 30px;
+}
+
+#recent-activity {
+  // text-align: center;
+}
+
+#recent-thread {
+
+}
+
+#recent-reply {
+  font-family: 'Raleway', 'sans-serif';
+  color: $customwhite;
+  font-size: 16px;
+}
+
+#recent-poster {
+  color: $customwhite;
+  font-size: 13px;
+}
+
+.stats-header {
+  background-color: black;
+  padding: 10px 20px;
+}
+
+.stats-body {
+  padding: 10px 20px;  
 }
 
 // Tweets Component

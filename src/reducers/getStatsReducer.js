@@ -1,7 +1,10 @@
 export default function (state = {
     userCount: null,
     threadCount: null,
-    replyCount: null
+    replyCount: null,
+    lastPost: null,
+    lastThread: null,
+    lastTopic: null
 }, action) {
     switch (action.type) {
         case 'GET_STATISTICS':

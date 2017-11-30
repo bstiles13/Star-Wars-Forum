@@ -74,9 +74,22 @@ module.exports = {
     },
     
     thread: (req, res) => {
+        console.log('getting thread');
         var id = req.params.id;
         Thread.findOne({ _id: id }).then(data => {
+            console.log(data);
             res.json(data);
+        }).catch(err => {
+            throw err;
+        })
+    },
+
+    topic: (req, res) => {
+        var id = req.params.id;
+        Topic.findOne({ _id: id }).then(data => {
+            res.json(data);
+        }).catch(err => {
+            throw err;
         })
     },
     
@@ -146,9 +159,13 @@ module.exports = {
         })
     },
     
-    lastPost: (req, res) => {
-        Reply.findOne({ topic_id: req.params.id }).then(data => {
+    lastReply: (req, res) => {
+        Reply.find().limit(1).sort({$natural:-1})
+        .then(data => {
+            console.log('data', data);
             res.json(data);
+        }).catch(err => {
+            throw err;
         })
     },
 

@@ -60,21 +60,38 @@ html, body {
   margin-right: 20px; }
 
 #news-container {
-  flex: 3;
+  flex: 3; }
+
+#news-content {
   display: flex;
   flex-wrap: wrap; }
 
 #news-header {
-  padding: 15px 0;
-  margin-bottom: 0;
   background-color: black;
+  padding: 10px 20px;
+  margin-bottom: 0;
   text-align: center; }
 
 #recent-activity, #forum-statistics {
-  height: 300px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   margin-bottom: 30px; }
+
+#recent-reply {
+  font-family: 'Raleway', 'sans-serif';
+  color: #fffff6;
+  font-size: 16px; }
+
+#recent-poster {
+  color: #fffff6;
+  font-size: 13px; }
+
+.stats-header {
+  background-color: black;
+  padding: 10px 20px; }
+
+.stats-body {
+  padding: 10px 20px; }
 
 #tweets {
   flex: 1; }
