@@ -116,16 +116,26 @@ html, body {
   100% {
     transform: rotate(360deg); } }
 
-#topic {
-  overflow: auto; }
-
-.list-group-item {
-  background-color: inherit; }
-
-.topic-row {
+.forum-row {
   display: flex;
   border-bottom: 1px solid #ffd711;
   color: #20c0ff; }
+
+.forum-signature {
+  color: #fffff6; }
+
+#topic {
+  overflow: auto; }
+
+#topic-header {
+  display: flex;
+  justify-content: space-between; }
+
+.topic-row {
+  color: #fffff6; }
+
+.list-group-item {
+  background-color: inherit; }
 
 #first-row {
   color: #fffff6; }
@@ -153,7 +163,7 @@ a {
   float: right; }
 
 #new-thread-button {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   float: right; }
 
 #new-thread {

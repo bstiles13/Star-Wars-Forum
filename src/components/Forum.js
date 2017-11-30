@@ -18,7 +18,7 @@ class Forum extends React.Component {
         if (topics != null) {
             return topics.map((topic, index) => {
                 return (
-                    <li className="list-group-item topic-row" key={index}>
+                    <li className="list-group-item forum-row" key={index}>
                         <div className="list-child flex-left">
                             <img src={icon} className="thread-icon" />
                         </div>
@@ -31,7 +31,7 @@ class Forum extends React.Component {
                                     ? (
                                         <div>
                                             <div><Link to={'/thread/' + topic.order + '/' + topic.recent.thread_id}>{topic.recent.title}</Link></div>
-                                            <div>by {topic.recent.poster} on {topic.recent.time.substring(0, 10)} </div>
+                                            <div className="forum-signature">by {topic.recent.poster} on {topic.recent.time.substring(0, 10)} </div>
                                         </div>
                                     )
                                     : <div>No posts</div>

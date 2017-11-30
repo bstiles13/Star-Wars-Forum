@@ -22,7 +22,7 @@ class Topic extends React.Component {
         if (threads != null) {
             return threads.map((thread, index) => {
                 return (
-                    <tr key={index}>
+                    <tr key={index} className="topic-row">
                         <td><Link to={'/thread/' + this.props.match.params.id + '/' + thread._id}>{thread.title}</Link></td>
                         <td>{thread.poster}</td>
                         <td>{thread.time_posted.substring(0, 10)}</td>
@@ -49,21 +49,21 @@ class Topic extends React.Component {
                 )
             })
         } else {
-            return <tr><td>No threads</td></tr>
+            return <tr className="topic-row"><td>No threads</td></tr>
         }
     }
 
     render() {
         return (
             <div id="topic">
-                {/* {"Topic: " + this.props.match.params.id} */}
-                <Breadcrumb topic={this.props.toggledTopic} />
-                {
-                    this.props.user
-                        ? <button type="button" id="new-thread-button" className="btn btn-danger btn-sm"><Link to={'/newthread/' + this.props.match.params.id} id="new-thread-link">New Thread</Link></button>
-                        : <button type="button" id="new-thread-button" className="btn btn-danger btn-sm" disabled>New Thread</button>
-                }
-                <br />
+                <div id="topic-header">
+                    <Breadcrumb topic={this.props.toggledTopic} />
+                    {
+                        this.props.user
+                            ? <button type="button" id="new-thread-button" className="btn btn-danger btn-sm"><Link to={'/newthread/' + this.props.match.params.id} id="new-thread-link">New Thread</Link></button>
+                            : <button type="button" id="new-thread-button" className="btn btn-danger btn-sm" disabled>New Thread</button>
+                    }
+                </div>
                 <table className="table table-hover">
                     <thead>
                         <tr>

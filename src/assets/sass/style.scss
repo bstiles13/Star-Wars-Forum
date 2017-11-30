@@ -148,20 +148,35 @@ html, body {
   100% { transform: rotate(360deg); }
 }
 
+// Forum component
+
+.forum-row {
+  display: flex;
+  border-bottom: 1px solid $customgold;
+  color: $customblue;
+}
+
+.forum-signature {
+  color: $customwhite;
+}
+
 // Topic Component
 
 #topic {
   overflow: auto;
 }
 
-.list-group-item {
-  background-color: inherit;
+#topic-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .topic-row {
-  display: flex;
-  border-bottom: 1px solid $customgold;
-  color: $customblue;
+  color: $customwhite;
+}
+
+.list-group-item {
+  background-color: inherit;
 }
 
 #first-row {
@@ -197,7 +212,7 @@ a {
 }
 
 #new-thread-button {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   float: right;
 }
 
