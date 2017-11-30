@@ -1,28 +1,22 @@
 export default function (state = {
-    invalidUser: {
-        toggle: false,
-        warning: 'Username and/or password is incorrect.'
-    },
-    invalidName: {
-        toggle: false,
-        warning: 'Username already exists.'      
-    },
-    invalidPassword: {
-        toggle: false,
-        warning: "Passwords do not match."   
-    },
-    invalidText: {
-        toggle: false,
-        warning: "Username and/or password is incomplete."
+    invalidUser: false,
+    invalidName: false,
+    invalidPassword: false,
+    invalidText: false,
+    text: {
+        invalidUser: 'Invalid username and/or password.',
+        invalidName: 'User already exists.',
+        invalidPassword: "Passwords do not match.",
+        invalidText: "Username and/or password is incomplete."
     }
 }, action) {
     switch (action.type) {
-        case "HANDLE_WARNING":
+        case 'HANDLE_WARNING':
             state = { ...state, ...action.payload }
             break;
-        case "CLEAR_WARNINGS":
-            return action.payload;
-        break;
+        case 'CLEAR_WARNINGS':
+            state = { ...state, ...action.payload }
+            break;
     }
     return state;
 }

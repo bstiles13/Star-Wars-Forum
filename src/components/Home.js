@@ -8,11 +8,19 @@ class Home extends React.Component {
     render() {
         return (
             <div id="home">
-                <h5 id="news-header">Featured News</h5>
-                <div id="news-container">
-                    <Articles />
-                    <Tweets />
+                <div id="home-content">
+                    <div id="statistics-container">
+                        <div id="recent-activity"></div>
+                        <div id="forum-statistics"></div>
+                    </div>
+                    <div id="news-container">
+                        <Articles />
+                        <Tweets />
+                    </div>
+                    {/* <h5 id="news-header">Featured News</h5> */}
+
                 </div>
+
             </div>
         )
     }

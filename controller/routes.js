@@ -199,9 +199,7 @@ router.post('/register', (req, res) => {
     // ADD VALIDATION
     User.findOne({ username: newUsername }, (err, userMatch) => {
         if (userMatch) {
-            return res.json({
-                error: `Sorry, already a user with the username: ${newUsername}`
-            })
+            res.send(false);
         }
         const newUser = {
             username: newUsername,
@@ -210,7 +208,7 @@ router.post('/register', (req, res) => {
         console.log('new user', newUser);
         User.create(newUser).then(savedUser => {
             console.log('saved user', savedUser);
-            req.session.username = savedUser.username;            
+            req.session.username = savedUser.username;
             res.json(savedUser)
         }).catch(err => {
             res.json(err)

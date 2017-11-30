@@ -3,33 +3,41 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { handleLogin } from '../actions/handleLoginAction.js';
+import { handleWarning, clearWarnings } from '../actions/handleWarningsAction.js';
 
 class Login extends React.Component {
 
     renderWarning(type) {
-        if (this.props.warnings[type].toggle) {
-            return (<div className='login-warning'>{this.props.warnings[type].warning}</div>)
+        if (this.props.warnings[type]) {
+            return (<div className='login-warning'>{this.props.warnings.text[type]}</div>)
         }
     }
 
-    submitLogin(userStatus) {
-        switch (userStatus) {
-            case false:
-                axios.post('/login', this.props.userForm).then(data => {
+    submitLogin(existingUser) {
+        let userForm = this.props.userForm;
+        this.props.clearWarnings();
+        switch (existingUser) {
+            case true:
+                if (userForm.existingUsername == '' || userForm.existingPassword == '') return this.props.handleWarning('invalidText');
+                axios.post('/login', userForm).then(data => {
                     console.log(data);
-                    window.location.href = '/';                          
+                    if (data.data == false) return this.props.handleWarning('invalidUser');                    
+                    window.location.href = '/';
                 })
                 break;
-            case true:
-                axios.post('/register', this.props.userForm).then(data => {
+            case false:
+                if (userForm.newUsername == '' || userForm.newPassword1 == '' || userForm.newPassword2 == '') return this.props.handleWarning('invalidText');
+                if (userForm.newPassword1 !== userForm.newPassword2) return this.props.handleWarning('invalidPassword');                
+                axios.post('/register', userForm).then(data => {
                     console.log('new user', data);
-                    window.location.href = '/';                          
+                    if (data.data == false) return this.props.handleWarning('invalidName');                                        
+                    window.location.href = '/';
                 })
                 break;
             case null:
                 axios.get('/guest').then(data => {
                     console.log(data);
-                    window.location.href = '/';                          
+                    window.location.href = '/';
                 })
                 break;
         }
@@ -56,7 +64,7 @@ class Login extends React.Component {
                             <label htmlFor="password" className="login-label">Password</label>
                             <input type="password" className="form-control login-input" id="password" placeholder="Password" name="existingPassword" onChange={this.props.handleLogin} />
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={() => this.submitLogin(false)}>Sign In</button>
+                        <button type="submit" className="btn btn-primary" onClick={() => this.submitLogin(true)}>Sign In</button>
                     </div>
                     <div id="new-user">
                         <h3>New User</h3>
@@ -72,7 +80,7 @@ class Login extends React.Component {
                             <label htmlFor="newPassword2" className="login-label">Password</label>
                             <input type="password" className="form-control login-input" id="newPassword2" placeholder="Re-Enter Password" name="newPassword2" onChange={this.props.handleLogin} />
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={() => this.submitLogin(true)}>Create Account</button>
+                        <button type="submit" className="btn btn-primary" onClick={() => this.submitLogin(false)}>Create Account</button>
                     </div>
                 </div>
                 <div id="guest-container">
@@ -93,7 +101,9 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        handleLogin: handleLogin
+        handleLogin: handleLogin,
+        handleWarning: handleWarning,
+        clearWarnings: clearWarnings
     }, dispatch)
 }
 
