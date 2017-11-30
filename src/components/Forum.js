@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Breadcrumb from './Breadcrumb';
+import Breadcrumb from './secondary/Breadcrumb';
 import axios from 'axios';
 import icon from '../assets/images/thread-icon.png'
 // Redux

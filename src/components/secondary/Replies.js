@@ -6,13 +6,13 @@ import NewReply from './NewReply';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getReplies } from '../actions/getRepliesAction.js';
-import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.js';
-import { toggleTopic } from '../actions/toggleTopicAction';
-import { setThreadUser } from '../actions/handleNewThreadAction.js';
-import { setReplyUser } from '../actions/handleNewReplyAction.js';
-import { flagReplyRemoval, flagReplyEdit, resetEditFlags } from '../actions/editAction.js';
-import { handleEdit } from '../actions/handleEditAction.js';
+import { getReplies } from '../../actions/getRepliesAction.js';
+import { handleNewReply, handleNewQuote } from '../../actions/handleNewReplyAction.js';
+import { toggleTopic } from '../../actions/toggleTopicAction';
+import { setThreadUser } from '../../actions/handleNewThreadAction.js';
+import { setReplyUser } from '../../actions/handleNewReplyAction.js';
+import { flagReplyRemoval, flagReplyEdit, resetEditFlags } from '../../actions/editAction.js';
+import { handleEdit } from '../../actions/handleEditAction.js';
 
 class Replies extends React.Component {
 

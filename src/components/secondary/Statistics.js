@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getStats } from '../actions/getStatsAction.js';
+import { getStats } from '../../actions/getStatsAction.js';
 
 class Statistics extends React.Component {
 

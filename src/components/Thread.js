@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-dom';
-import Replies from './Replies';
-import Breadcrumb from './Breadcrumb';
-import ModalQuote from './ModalQuote';
-import ModalDeleteReply from './ModalDeleteReply';
-import EditThread from './EditThread';
+import Replies from './secondary/Replies';
+import Breadcrumb from './secondary/Breadcrumb';
+import ModalQuote from './secondary/ModalQuote';
+import ModalDeleteReply from './secondary/ModalDeleteReply';
+import EditThread from './secondary/EditThread';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

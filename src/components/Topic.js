@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Breadcrumb from './Breadcrumb';
-import ModalDeleteThread from './ModalDeleteThread';
+import Breadcrumb from './secondary/Breadcrumb';
+import ModalDeleteThread from './secondary/ModalDeleteThread';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

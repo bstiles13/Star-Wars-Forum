@@ -4,8 +4,8 @@ import axios from 'axios';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { handleWarning, clearWarnings } from '../actions/handleWarningsAction.js';
-import { resetNewReply } from '../actions/handleNewReplyAction.js';
+import { handleWarning, clearWarnings } from '../../actions/handleWarningsAction.js';
+import { resetNewReply } from '../../actions/handleNewReplyAction.js';
 
 class NewReply extends React.Component {
 

@@ -3,8 +3,8 @@ import axios from 'axios';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { handleNewReply } from '../actions/handleNewReplyAction.js';
-import { setReplyUser } from '../actions/handleNewReplyAction.js';
+import { handleNewReply } from '../../actions/handleNewReplyAction.js';
+import { setReplyUser } from '../../actions/handleNewReplyAction.js';
 
 class ModalQuote extends React.Component {
 

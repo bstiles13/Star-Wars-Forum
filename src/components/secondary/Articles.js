@@ -3,7 +3,7 @@ import Loader from './Loader';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getArticles } from '../actions/getArticlesAction.js';
+import { getArticles } from '../../actions/getArticlesAction.js';
 
 class Articles extends React.Component {
 

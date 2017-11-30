@@ -3,9 +3,9 @@ import axios from 'axios';
 // Redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { resetEditFlags } from '../actions/editAction.js';
-import { handleEdit } from '../actions/handleEditAction.js';
-import { getReplies } from '../actions/getRepliesAction.js';
+import { resetEditFlags } from '../../actions/editAction.js';
+import { handleEdit } from '../../actions/handleEditAction.js';
+import { getReplies } from '../../actions/getRepliesAction.js';
 
 class EditThread extends React.Component {
 
