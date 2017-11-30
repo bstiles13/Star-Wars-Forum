@@ -2,7 +2,7 @@
   "name": "Star-Wars-Forum",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",  
+  "main": "server.js",
   "dependencies": {
     "axios": "^0.17.1",
     "bcrypt": "^1.0.3",
@@ -21,13 +21,15 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1",
     "node-sass": "^4.7.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "url-loader": "^0.6.2"
   },
   "scripts": {
     "build-css": "node-sass src/assets/sass/style.scss -o src/assets/css/",
     "watch-css": "node-sass src/assets/sass/style.scss -o src/assets/css/ --watch --recursive",
-    "start": "node server.js",    
+    "start": "node server.js",
     "start-js": "react-scripts start",
     "start-dev": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
