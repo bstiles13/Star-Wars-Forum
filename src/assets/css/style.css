@@ -153,7 +153,8 @@ html, body {
   border-radius: 50%;
   width: 120px;
   height: 120px;
-  animation: spin 2s linear infinite; }
+  animation: spin 2s linear infinite;
+  margin: 30px auto; }
 
 @keyframes spin {
   0% {
@@ -446,3 +447,6 @@ a:not([href]):hover {
 
 .warning-color {
   color: #f10000; }
+
+.modal-body, .modal-header {
+  color: black; }

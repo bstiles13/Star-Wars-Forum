@@ -43,13 +43,13 @@ class Statistics extends React.Component {
                     <h6 className="stats-header">Forum Statistics</h6>
                     <div className="stats-body">
                         <div className="count-row">
-                            <span className="count-name">Threads:</span><span clasName="count-number">{this.props.stats.threadCount}</span>
+                            <span className="count-name">Threads:</span><span className="count-number">{this.props.stats.threadCount}</span>
                         </div>
                         <div className="count-row">
-                            <span className="count-name">Posts:</span><span clasName="count-number">{this.props.stats.replyCount}</span>
+                            <span className="count-name">Posts:</span><span className="count-number">{this.props.stats.replyCount}</span>
                         </div>
                         <div className="count-row">
-                            <span className="count-name">Users:</span><span clasName="count-number">{this.props.stats.userCount}</span>
+                            <span className="count-name">Users:</span><span className="count-number">{this.props.stats.userCount}</span>
                         </div>
                     </div>
                 </div>

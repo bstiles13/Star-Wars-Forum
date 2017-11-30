@@ -26,7 +26,7 @@ export const flagReplyEdit = (id) => {
     }
 }
 
-export const reset = () => {
+export const resetEditFlags = () => {
     return {
         type: 'RESET',
         payload: {

@@ -6,7 +6,7 @@ import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.
 import { toggleTopic } from '../actions/toggleTopicAction';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { setReplyUser } from '../actions/handleNewReplyAction.js';
-import { flagReplyRemoval, flagReplyEdit, reset } from '../actions/editAction.js';
+import { flagReplyRemoval, flagReplyEdit, resetEditFlags } from '../actions/editAction.js';
 import { handleEdit } from '../actions/handleEditAction.js';
 import ModalQuote from './ModalQuote';
 import ModalDeleteReply from './ModalDeleteReply';
@@ -64,20 +64,19 @@ class Replies extends React.Component {
                                                             <ModalDeleteReply
                                                                 getReplies={() => this.props.getReplies(this.props.threadId)}
                                                                 replyToDelete={this.props.pendingEdits.replyToDelete}
-                                                                reset={this.props.reset}
+                                                                resetEditFlags={this.props.resetEditFlags}
                                                                 reply={reply}
                                                             />
-                                                            <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
                                                         </div>
                                                     )
-                                                    : (
-                                                        <div>
-                                                            <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
-                                                            <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
-                                                        </div>
-                                                    )
-                                            }
+                                                    : <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
 
+                                            }
+                                            {
+                                                this.props.user == reply.poster && this.props.user != 'Anonymous'
+                                                    ? <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
+                                                    : <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                            }
                                         </div>
                                     )
                                     : <div className="reply-options">
@@ -87,7 +86,6 @@ class Replies extends React.Component {
                                     </div>
                             }
                         </div>
-                        <br />
                     </div>
                 )
             })
@@ -128,7 +126,7 @@ function matchDispatchToProps(dispatch) {
         setReplyUser: setReplyUser,
         flagReplyRemoval: flagReplyRemoval,
         flagReplyEdit: flagReplyEdit,
-        reset: reset,
+        resetEditFlags: resetEditFlags,
         handleEdit: handleEdit
     }, dispatch)
 }

@@ -6,7 +6,7 @@ class ModalDeleteReply extends React.Component {
     deleteReply() {
         axios.get('/deletereply/' + this.props.replyToDelete).then(data => {
             this.props.getReplies();
-            this.props.reset();
+            this.props.resetEditFlags();
         })
     }
 

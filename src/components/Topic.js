@@ -6,7 +6,7 @@ import { getUser } from '../actions/getUserAction.js';
 import { getThreads } from '../actions/getThreadsAction.js';
 import Breadcrumb from './Breadcrumb';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
-import { flagThreadRemoval, reset } from '../actions/editAction.js';
+import { flagThreadRemoval, resetEditFlags } from '../actions/editAction.js';
 import ModalDeleteThread from './ModalDeleteThread';
 
 class Topic extends React.Component {
@@ -36,12 +36,11 @@ class Topic extends React.Component {
                                             <ModalDeleteThread
                                                 getThreads={() => this.props.getThreads(this.props.match.params.id)}
                                                 threadToDelete={this.props.pendingEdits.threadToDelete}
-                                                reset={this.props.reset}
+                                                resetEditFlags={this.props.resetEditFlags}
                                             />
                                         </div>
                                     )
                                     : <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
-
                             }
 
                         </td>
@@ -98,7 +97,7 @@ function matchDispatchToProps(dispatch) {
         toggleTopic: toggleTopic,
         getUser: getUser,
         flagThreadRemoval: flagThreadRemoval,
-        reset: reset
+        resetEditFlags: resetEditFlags
     }, dispatch)
 }
 
