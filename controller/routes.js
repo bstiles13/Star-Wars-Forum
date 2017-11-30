@@ -227,8 +227,9 @@ router.get('/logout', (req, res) => {
 })
 
 // Default route that sends HTML file to browser
-router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + './build/index.html'));
-})
+router.get('*', function (req, res) {
+    const index = path.join(__dirname, 'build', 'index.html');
+    res.sendFile(index);
+  });
 
 module.exports = router;
