@@ -36,7 +36,6 @@ class NewThread extends React.Component {
         if (this.props.newThread.title == '' || this.props.newThread.title == null) return this.props.handleWarning('invalidTitle');
         if (this.props.newThread.message == '' || this.props.newThread.message == null) return this.props.handleWarning('invalidMessage');
         axios.post('/newthread', this.props.newThread).then(data => {
-            console.log('new thread success', data);
             this.props.resetNewThread();
             this.props.history.push('/thread/' + this.props.match.params.id + '/' + data.data._id);
         })

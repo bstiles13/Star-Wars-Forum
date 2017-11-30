@@ -13,7 +13,6 @@ class ModalQuote extends React.Component {
 
     submitReply() {
         axios.post('/newreply', this.props.newReply).then(data => {
-            console.log(data);
             this.props.getReplies(this.props.threadId);            
         })
     }

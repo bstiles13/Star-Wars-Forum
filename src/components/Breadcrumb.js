@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom';
 
 class Breadcrumb extends React.Component {
 
-    componentDidMount() {
-        console.log('breadcrumb params', this.props);
-    }
-
     render() {
         return (
             <div id='breadcrumb'>

@@ -20,7 +20,6 @@ class Login extends React.Component {
             case true:
                 if (userForm.existingUsername == '' || userForm.existingPassword == '') return this.props.handleWarning('invalidText');
                 axios.post('/login', userForm).then(data => {
-                    console.log(data);
                     if (data.data == false) return this.props.handleWarning('invalidUser');                    
                     window.location.href = '/';
                 })
@@ -29,14 +28,12 @@ class Login extends React.Component {
                 if (userForm.newUsername == '' || userForm.newPassword1 == '' || userForm.newPassword2 == '') return this.props.handleWarning('invalidText');
                 if (userForm.newPassword1 !== userForm.newPassword2) return this.props.handleWarning('invalidPassword');                
                 axios.post('/register', userForm).then(data => {
-                    console.log('new user', data);
                     if (data.data == false) return this.props.handleWarning('invalidName');                                        
                     window.location.href = '/';
                 })
                 break;
             case null:
                 axios.get('/guest').then(data => {
-                    console.log(data);
                     window.location.href = '/';
                 })
                 break;

@@ -9,13 +9,11 @@ import logo from '../assets/images/logo.png';
 class Navbar extends React.Component {
 
     componentDidMount() {
-        console.log('nav mounted');
         this.props.getUser();
     }
 
     logout() {
         axios.get('/logout').then(data => {
-            console.log('logged out', data.data);
             this.props.resetUser();
             window.location.href = '/';
         })

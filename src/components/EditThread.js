@@ -10,7 +10,6 @@ class EditThread extends React.Component {
 
     saveEdit() {
         axios.post('/editthread', { id: this.props.pendingEdits.threadToEdit, title: this.props.edit.title, message: this.props.edit.message }).then(data => {
-            console.log('edit thread', data);
             this.props.getOneThread();
             this.props.reset();
         })

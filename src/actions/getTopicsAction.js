@@ -3,7 +3,6 @@ import axios from 'axios';
 export const getTopics = () => {
     return function (dispatch) {
         axios.get('/topics').then(data => {
-            console.log('topics', data.data);
             let topics = data.data;
             for (var i = 0; i < topics.length; i++) {
                 if (topics[i].replyHistory.length > 0) {

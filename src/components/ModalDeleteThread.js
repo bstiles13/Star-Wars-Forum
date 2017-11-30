@@ -4,7 +4,6 @@ import axios from 'axios';
 class ModalDeleteThread extends React.Component {
 
     deleteThread(id) {
-        console.log(id);
         axios.get('/deletethread/' + this.props.threadToDelete).then(data => {
             this.props.getThreads();
             this.props.reset();

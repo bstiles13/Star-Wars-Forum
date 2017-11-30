@@ -12,7 +12,6 @@ class NewReply extends React.Component {
         this.props.clearWarnings();
         if (this.props.newReply.message == '' || this.props.newReply.message == null) return this.props.handleWarning('invalidMessage');
         axios.post('/newreply', this.props.newReply).then(data => {
-            console.log(data);
             this.props.resetNewReply();
             document.getElementById('quick-message').value = '';
             this.props.getReplies(this.props.threadId);

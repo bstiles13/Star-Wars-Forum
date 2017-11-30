@@ -23,7 +23,7 @@ class Forum extends React.Component {
                             <img src={icon} className="thread-icon" />
                         </div>
                         <div className="list-child flex-center">
-                            <Link to={'/topic/' + topic.order} onClick={() => console.log('clicked route')}>{topic.topic.toUpperCase()}</Link>
+                            <Link to={'/topic/' + topic.order}>{topic.topic.toUpperCase()}</Link>
                         </div>
                         <div className="list-child flex-right">
                             {

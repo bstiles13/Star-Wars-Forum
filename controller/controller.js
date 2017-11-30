@@ -58,9 +58,7 @@ module.exports = {
     },
     
     replies: (req, res) => {
-        console.log('test', req.params.id);
         Reply.find({ thread_id: req.params.id }).then(data => {
-            console.log('replies complete');
             res.json(data);
         }).catch(err => {
             throw err;
@@ -68,7 +66,6 @@ module.exports = {
     },
     
     deleteReply: (req, res) => {
-        console.log('delete id', req.params.id);    
         Reply.remove({ _id: req.params.id }).then(data => {
             res.json(data);
         }).catch(err => {
@@ -105,12 +102,9 @@ module.exports = {
     
     articles: (req, res) => {
         let date = moment().subtract(40, 'days').format('YYYYMMDD');
-        // let date = prevMonth.substring(0,5) + prevMonth.substring(6, 8)
-        console.log('date', date);
         let query = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=star+wars&begin_date=" + date + "&api-key=57828338a1d747908e089f87cc6a7a77"
         // Send GET request to New York Times and add resulting collection to "articles" object to be returned to browser
         axios.get(query).then(data => {
-            // console.log('data', data.data);
             res.json(data.data.response);
         })
     },
@@ -130,7 +124,6 @@ module.exports = {
             newReply.message = '<div class="quote"><div class="quote-poster">Posted by ' + newReply.quotedPoster + '</div><div class="quote-body">' + newReply.quotedMessage + '</div></div><br/>' + newReply.message;
         }
         Reply.create(newReply).then(data => {
-            console.log('new reply success');
             res.send(true);
         }).catch(err => {
             console.log(err);
@@ -138,7 +131,6 @@ module.exports = {
     },
     
     editThread: (req, res) => {
-        console.log('body', req.body);
         Thread.update({ _id: req.body.id }, { title: req.body.title, message: req.body.message }).then(data => {
             res.json(data);
         }).catch(err => {
@@ -147,7 +139,6 @@ module.exports = {
     },
     
     editReply: (req, res) => {
-        console.log('body', req.body);
         Reply.update({ _id: req.body.id }, { message: req.body.message }).then(data => {
             res.json(data);
         }).catch(err => {
@@ -178,9 +169,7 @@ module.exports = {
                 req.session.username = null;
                 res.send(false);
             } else {
-                console.log('successful login', user);
                 req.session.username = user.username;
-                console.log('session', req.session);
                 res.json(user);
             }
         });
@@ -188,12 +177,10 @@ module.exports = {
     
     guest: (req, res) => {
         req.session.username = 'Anonymous';
-        console.log('session', req.session);
         res.json(req.session.username);
     },
     
     register: (req, res) => {
-        console.log('registering');
         const { newUsername, newPassword1 } = req.body
         // ADD VALIDATION
         User.findOne({ username: newUsername }, (err, userMatch) => {
@@ -204,9 +191,7 @@ module.exports = {
                 username: newUsername,
                 password: newPassword1
             }
-            console.log('new user', newUser);
             User.create(newUser).then(savedUser => {
-                console.log('saved user', savedUser);
                 req.session.username = savedUser.username;
                 res.json(savedUser)
             }).catch(err => {
