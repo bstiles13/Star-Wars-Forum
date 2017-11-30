@@ -34,7 +34,7 @@ app.use("/", routes);
 
 // Default route that sends HTML file to browser
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname + './build/index.html'));
+    res.sendFile(path.join(__dirname + '/build/index.html'));
 })
 
 // Start Express Server
