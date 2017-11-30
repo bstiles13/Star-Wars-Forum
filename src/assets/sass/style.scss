@@ -433,6 +433,12 @@ a {
   border-radius: 2%;
 }
 
+// EditReply, //EditThread components
+
+.edit-button {
+  margin: 5px 10px 0 0;
+}
+
 // Navbar
 
 #navbar {
@@ -562,6 +568,7 @@ a:not([href]):hover {
 .fa-trash {
   color: $customred;
   font-size: 20px;
+  margin: 5px;
 }
 
 .fa-trash:hover {

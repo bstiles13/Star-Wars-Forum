@@ -28,8 +28,8 @@ class EditThread extends React.Component {
                 <input type="text" className="form-control" id="edit-title-label" defaultValue={this.props.originalTitle} name="title" onChange={this.props.handleEdit} />
                 <div>Message</div>
                 <textarea type="text" className="form-control" id="edit-message-label" defaultValue={this.props.originalMessage} name="message" onChange={this.props.handleEdit}></textarea>
-                <button className="btn btn-default btn-sm" onClick={this.resetEdit.bind(this)}>Cancel</button>
-                <button className="btn btn-info btn-sm" onClick={this.saveEdit.bind(this)}>Save</button>
+                <button className="btn btn-default btn-sm edit-button" onClick={this.resetEdit.bind(this)}>Cancel</button>
+                <button className="btn btn-info btn-sm edit-button" onClick={this.saveEdit.bind(this)}>Save</button>
             </div>
         )
     }

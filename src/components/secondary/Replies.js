@@ -76,15 +76,15 @@ class Replies extends React.Component {
                                             }
                                             {
                                                 this.props.user == reply.poster && this.props.user != 'Anonymous'
-                                                    ? <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
-                                                    : <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                                    ? <i className="fa fa-pencil option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
+                                                    : <i className="fa fa-pencil disabled-icon" aria-hidden="true"></i>
                                             }
                                         </div>
                                     )
                                     : <div className="reply-options">
                                         <i className="fa fa-reply disabled-icon" aria-hidden="true"></i>
                                         <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
-                                        <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                        <i className="fa fa-pencil disabled-icon" aria-hidden="true"></i>
                                     </div>
                             }
                         </div>

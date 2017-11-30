@@ -25,8 +25,8 @@ class EditReply extends React.Component {
         return (
             <div>
                 <textarea type="text" className="form-control" id="form-post" defaultValue={this.props.original} name="message" onChange={this.props.handleEdit}></textarea>
-                <button className="btn btn-default btn-sm" onClick={this.resetEdit.bind(this)}>Cancel</button>
-                <button className="btn btn-info btn-sm" onClick={this.saveEdit.bind(this)}>Save</button>
+                <button className="btn btn-default btn-sm edit-button" onClick={this.resetEdit.bind(this)}>Cancel</button>
+                <button className="btn btn-info btn-sm edit-button" onClick={this.saveEdit.bind(this)}>Save</button>
             </div>
         )
     }
