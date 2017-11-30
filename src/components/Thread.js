@@ -66,7 +66,11 @@ class Thread extends React.Component {
                                                         toggledTopic={this.props.toggledTopic}
                                                         threadId={this.props.match.params.threadid}
                                                     />
-                                                    <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(this.props.oneThread._id) && this.props.handleEdit(event, this.props.oneThread.message, this.props.oneThread.title)}></i>
+                                                    {
+                                                        this.props.user == this.props.oneThread.poster && this.props.user != 'Anonymous'
+                                                        ? <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagThreadEdit(this.props.oneThread._id) && this.props.handleEdit(event, this.props.oneThread.message, this.props.oneThread.title)}></i>
+                                                        : <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                                    }
                                                 </div>
                                             )
                                             : (

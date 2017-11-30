@@ -14,6 +14,7 @@ class NewReply extends React.Component {
         axios.post('/newreply', this.props.newReply).then(data => {
             console.log(data);
             this.props.resetNewReply();
+            document.getElementById('quick-message').value = '';
             this.props.getReplies(this.props.threadId);
         })
     }
@@ -33,8 +34,8 @@ class NewReply extends React.Component {
                             <div>
                                 {this.renderWarning('invalidMessage')}
                                 <div className="form-group">
-                                    <label className="label" htmlFor="threadPost">Quick Reply:</label>
-                                    <textarea type="text" className="form-control" id="threadPost"
+                                    <label className="label" htmlFor="quick-message">Quick Reply:</label>
+                                    <textarea type="text" className="form-control" id="quick-message"
                                         placeholder="Share what's on your mind" name="message" onChange={this.props.handleNewReply}></textarea>
                                 </div>
                                 <button type="submit" className="btn btn-outline-danger" onClick={this.submitReply.bind(this)}>Reply</button>

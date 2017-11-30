@@ -28,12 +28,22 @@ class Topic extends React.Component {
                         <td>{thread.time_posted.substring(0, 10)}</td>
                         <td>{thread.history.length}</td>
                         <td>
-                            <i className="fa fa-trash" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-thread" onClick={() => this.props.flagThreadRemoval(thread._id)}></i>
-                            <ModalDeleteThread
-                                getThreads={() => this.props.getThreads(this.props.match.params.id)}
-                                threadToDelete={this.props.pendingEdits.threadToDelete}
-                                reset={this.props.reset}
-                            />
+                            {
+                                this.props.user == thread.poster && this.props.user != 'Anonymous'
+                                    ? (
+                                        <div>
+                                            <i className="fa fa-trash" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-thread" onClick={() => this.props.flagThreadRemoval(thread._id)}></i>
+                                            <ModalDeleteThread
+                                                getThreads={() => this.props.getThreads(this.props.match.params.id)}
+                                                threadToDelete={this.props.pendingEdits.threadToDelete}
+                                                reset={this.props.reset}
+                                            />
+                                        </div>
+                                    )
+                                    : <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
+
+                            }
+
                         </td>
                     </tr>
                 )

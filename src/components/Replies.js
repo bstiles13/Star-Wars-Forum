@@ -56,14 +56,28 @@ class Replies extends React.Component {
                                                 toggledTopic={this.props.toggledTopic}
                                                 threadId={this.props.threadid}
                                             />
-                                            <i className="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.flagReplyRemoval(reply._id)}></i>
-                                            <ModalDeleteReply
-                                                getReplies={() => this.props.getReplies(this.props.threadId)}
-                                                replyToDelete={this.props.pendingEdits.replyToDelete}
-                                                reset={this.props.reset}
-                                                reply={reply}
-                                            />
-                                            <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
+                                            {
+                                                this.props.user == reply.poster && this.props.user != 'Anonymous'
+                                                    ? (
+                                                        <div>
+                                                            <i className="fa fa-trash option-icon" aria-hidden="true" data-toggle="modal" data-target="#modal-delete-reply" onClick={() => this.props.flagReplyRemoval(reply._id)}></i>
+                                                            <ModalDeleteReply
+                                                                getReplies={() => this.props.getReplies(this.props.threadId)}
+                                                                replyToDelete={this.props.pendingEdits.replyToDelete}
+                                                                reset={this.props.reset}
+                                                                reply={reply}
+                                                            />
+                                                            <i className="fa fa-info option-icon" aria-hidden="true" onClick={(event) => this.props.flagReplyEdit(reply._id) && this.props.handleEdit(event, reply.message)}></i>
+                                                        </div>
+                                                    )
+                                                    : (
+                                                        <div>
+                                                            <i className="fa fa-trash disabled-icon" aria-hidden="true"></i>
+                                                            <i className="fa fa-info disabled-icon" aria-hidden="true"></i>
+                                                        </div>
+                                                    )
+                                            }
+
                                         </div>
                                     )
                                     : <div className="reply-options">
