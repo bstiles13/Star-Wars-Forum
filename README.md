@@ -4,7 +4,7 @@ An online community for Star Wars enthusiasts. Discuss anything about our favori
 
 ## Homepage
 
-![home](https://github.com/bstiles13/Forum/blob/master/src/assets/screenshots/screenshot_homepage.png)
+![home](https://github.com/bstiles13/Forum/blob/master/src/assets/screenshots/screenshot_home.png)
 
 ## Forum
 
