@@ -248,6 +248,9 @@ a {
 #thread-title {
   font-weight: bold; }
 
+.thread-message {
+  white-space: pre-wrap; }
+
 .thread-options {
   flex: 1;
   display: flex;

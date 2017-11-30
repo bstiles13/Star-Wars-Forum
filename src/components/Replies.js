@@ -23,7 +23,8 @@ class Replies extends React.Component {
     }
 
     createMarkup(html) {
-        return { __html: html }
+        let cleanHtml = html.replace(/\n/g, "<br />");                
+        return { __html: cleanHtml }
     }
 
     renderReplies() {
