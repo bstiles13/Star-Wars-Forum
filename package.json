@@ -26,8 +26,9 @@
   "scripts": {
     "build-css": "node-sass src/assets/sass/style.scss -o src/assets/css/",
     "watch-css": "node-sass src/assets/sass/style.scss -o src/assets/css/ --watch --recursive",
+    "start": "node server.js",    
     "start-js": "react-scripts start",
-    "start": "npm-run-all -p watch-css start-js",
+    "start-dev": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
