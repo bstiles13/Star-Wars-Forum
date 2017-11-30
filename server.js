@@ -32,6 +32,11 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + "/build"));
 app.use("/", routes);
 
+// Default route that sends HTML file to browser
+app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname + './build/index.html'));
+})
+
 // Start Express Server
 app.listen(PORT, function () {
     console.log("Successful server connection on port " + PORT);
