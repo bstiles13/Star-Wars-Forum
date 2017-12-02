@@ -8,6 +8,7 @@ import { handleNewThread, resetNewThread } from '../actions/handleNewThreadActio
 import { toggleTopic } from '../actions/toggleTopicAction.js';
 import { setThreadUser } from '../actions/handleNewThreadAction.js';
 import { handleWarning, clearWarnings } from '../actions/handleWarningsAction.js';
+import { setPath } from '../actions/pathTraceAction.js';
 
 class NewThread extends React.Component {
 
@@ -27,6 +28,7 @@ class NewThread extends React.Component {
     }
 
     componentDidMount() {
+        this.props.setPath(window.location.href);                
         this.props.getTopics();        
         this.props.setThreadUser(this.props.user);
         this.props.toggleTopic(this.props.match.params.id);
@@ -87,7 +89,8 @@ function matchDispatchToProps(dispatch) {
         toggleTopic: toggleTopic,
         setThreadUser: setThreadUser,
         handleWarning: handleWarning,
-        clearWarnings: clearWarnings
+        clearWarnings: clearWarnings,
+        setPath: setPath
     }, dispatch)
 }
 

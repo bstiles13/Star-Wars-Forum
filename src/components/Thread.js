@@ -15,10 +15,12 @@ import { handleNewReply, handleNewQuote } from '../actions/handleNewReplyAction.
 import { flagThreadEdit } from '../actions/editAction.js';
 import { handleEdit } from '../actions/handleEditAction.js';
 import { getUser } from '../actions/getUserAction.js';
+import { setPath } from '../actions/pathTraceAction.js';
 
 class Thread extends React.Component {
 
     componentDidMount() {
+        this.props.setPath(window.location.href);                
         this.props.getUser();
         this.props.toggleTopic(this.props.match.params.topicid);
         this.props.getOneThread(this.props.match.params.threadid);
@@ -115,7 +117,8 @@ function matchDispatchToProps(dispatch) {
         handleNewQuote: handleNewQuote,
         flagThreadEdit: flagThreadEdit,
         handleEdit: handleEdit,
-        getUser: getUser
+        getUser: getUser,
+        setPath: setPath
     }, dispatch)
 }
 

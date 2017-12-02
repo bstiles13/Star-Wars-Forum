@@ -22,7 +22,7 @@ class Login extends React.Component {
                 if (userForm.existingUsername == '' || userForm.existingPassword == '') return this.props.handleWarning('invalidText');
                 axios.post('/login', userForm).then(data => {
                     if (data.data == false) return this.props.handleWarning('invalidUser');                    
-                    window.location.href = '/';
+                    window.location.href = this.props.pathTrace;
                 })
                 break;
             case false:
@@ -30,12 +30,12 @@ class Login extends React.Component {
                 if (userForm.newPassword1 !== userForm.newPassword2) return this.props.handleWarning('invalidPassword');                
                 axios.post('/register', userForm).then(data => {
                     if (data.data == false) return this.props.handleWarning('invalidName');                                        
-                    window.location.href = '/';
+                    window.location.href = this.props.pathTrace;
                 })
                 break;
             case null:
                 axios.get('/guest').then(data => {
-                    window.location.href = '/';
+                    window.location.href = this.props.pathTrace;
                 })
                 break;
         }
@@ -93,7 +93,8 @@ class Login extends React.Component {
 function mapStateToProps(state) {
     return {
         userForm: state.userForm,
-        warnings: state.warnings
+        warnings: state.warnings,
+        pathTrace: state.pathTrace
     }
 }
 

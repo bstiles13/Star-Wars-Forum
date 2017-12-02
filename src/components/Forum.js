@@ -7,10 +7,12 @@ import icon from '../assets/images/thread-icon.png'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTopics } from '../actions/getTopicsAction.js';
+import { setPath } from '../actions/pathTraceAction.js';
 
 class Forum extends React.Component {
 
     componentDidMount() {
+        this.props.setPath(window.location.href);        
         this.props.getTopics();
     }
 
@@ -70,7 +72,8 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        getTopics: getTopics
+        getTopics: getTopics,
+        setPath: setPath
     }, dispatch)
 }
 

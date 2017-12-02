@@ -9,10 +9,12 @@ import { getUser } from '../actions/getUserAction.js';
 import { getThreads } from '../actions/getThreadsAction.js';
 import { toggleTopic } from '../actions/toggleTopicAction.js';
 import { flagThreadRemoval, resetEditFlags } from '../actions/editAction.js';
+import { setPath } from '../actions/pathTraceAction.js';
 
 class Topic extends React.Component {
 
     componentDidMount() {
+        this.props.setPath(window.location.href);                        
         this.props.getUser();
         this.props.getThreads(this.props.match.params.id);
         this.props.toggleTopic(this.props.match.params.id);
@@ -98,7 +100,8 @@ function matchDispatchToProps(dispatch) {
         toggleTopic: toggleTopic,
         getUser: getUser,
         flagThreadRemoval: flagThreadRemoval,
-        resetEditFlags: resetEditFlags
+        resetEditFlags: resetEditFlags,
+        setPath: setPath
     }, dispatch)
 }
 

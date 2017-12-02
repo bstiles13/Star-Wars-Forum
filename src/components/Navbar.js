@@ -16,7 +16,7 @@ class Navbar extends React.Component {
     logout() {
         axios.get('/logout').then(data => {
             this.props.resetUser();
-            window.location.href = '/';
+            window.location.href = this.props.pathTrace;
         })
     }
 
@@ -47,7 +47,10 @@ class Navbar extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return { user: state.user }
+    return {
+        user: state.user,
+        pathTrace: state.pathTrace
+    }
 }
 
 function matchDispatchToProps(dispatch) {

@@ -13,6 +13,7 @@ import getUserReducer from './getUserReducer.js';
 import editReducer from './editReducer.js';
 import handleEditReducer from './handleEditReducer.js';
 import getStatsReducer from './getStatsReducer.js';
+import pathTraceReducer from './pathTraceReducer.js';
 
 let reducers = combineReducers({
     articles: getArticlesReducer,
@@ -28,7 +29,8 @@ let reducers = combineReducers({
     pendingEdits: editReducer,
     user: getUserReducer,
     edit: handleEditReducer,
-    stats: getStatsReducer
+    stats: getStatsReducer,
+    pathTrace: pathTraceReducer
 })
 
 export default reducers;
