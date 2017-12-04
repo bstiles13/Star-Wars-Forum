@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const getStats = () => {
-    console.log('getting stats');
     return function (dispatch) {
         axios.get('/usercount').then(data => {
             dispatch({
@@ -28,7 +27,6 @@ export const getStats = () => {
             })
         })
         axios.get('/lastreply').then(data => {
-            console.log('last post', data);
             dispatch({
                 type: 'GET_STATISTICS',
                 payload: { lastReply: data.data[0] }
