@@ -15,16 +15,16 @@ class Articles extends React.Component {
         let articles = this.props.articles;
         if (articles != null) {
             return articles.map((article, index) => {
-                let url = article.multimedia.length > 0 ? "https://cdn1.nyt.com/" + article.multimedia[0].url : "https://edge.alluremedia.com.au/m/l/2017/10/Star-Wars.jpg";
+                let url = article.urlToImage ? article.urlToImage : "https://edge.alluremedia.com.au/m/l/2017/10/Star-Wars.jpg";
                 if (index == 0) {
                     return (
                         <div className="carousel-item active" key={index}>
                             <img className="carousel-image" src={url} alt="..." />
                             <div className="carousel-caption">
-                                <h3 className="caption-header">{article.headline.main}</h3>
+                                <h3 className="caption-header">{article.title}</h3>
                                 <p>
-                                    {article.snippet}
-                                    <a className="caption-url" href={article.web_url} target="_blank">Read More</a>
+                                    {article.description}
+                                    <a className="caption-url" href={article.url} target="_blank">Read More</a>
                                 </p>
                             </div>
                         </div>
@@ -34,10 +34,10 @@ class Articles extends React.Component {
                         <div className="carousel-item" key={index}>
                             <img className="carousel-image" src={url} alt="..." />
                             <div className="carousel-caption">
-                                <h3 className="caption-header">{article.headline.main}</h3>
+                                <h3 className="caption-header">{article.title}</h3>
                                 <p>
-                                    {article.snippet}
-                                    <a className="caption-url" href={article.web_url} target="_blank">Read More</a>
+                                    {article.description}
+                                    <a className="caption-url" href={article.url} target="_blank">Read More</a>
                                 </p>
                             </div>
                         </div>

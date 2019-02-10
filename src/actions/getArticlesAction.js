@@ -5,7 +5,7 @@ export const getArticles = () => {
         axios.get('/articles').then(data => {
             dispatch({
                 type: 'GET_ARTICLES',
-                payload: data.data.docs
+                payload: data.data.articles
             })
         })
     }

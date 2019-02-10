@@ -9,11 +9,11 @@ module.exports = {
 
     // Retrieves Star Wars articles from New York Times API dated within last month
     articles: (req, res) => {
-        let date = moment().subtract(40, 'days').format('YYYYMMDD');
-        let query = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=star+wars&begin_date=" + date + "&api-key=57828338a1d747908e089f87cc6a7a77"
+        let date = moment().subtract(30, 'days').format('YYYY-MM-DD');
+        let query = 'https://newsapi.org/v2/everything?q=star-wars&language=en&from=' + date + '&sortBy=relevancy&apiKey=7ec1b51db89c469fa7177a2f483243c8';
         // Send GET request to New York Times and add resulting collection to "articles" object to be returned to browser
         axios.get(query).then(data => {
-            res.json(data.data.response);
+            res.json(data.data);
         })
     },
 
