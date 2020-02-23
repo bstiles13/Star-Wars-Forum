@@ -1,12 +1,16 @@
 let axios = require('axios');
 let moment = require('moment');
+const axiosRetry = require('axios-retry');
+
 let Topic = require('../model/topic.js');
 let Thread = require('../model/thread.js');
 let Reply = require('../model/reply.js');
 let User = require('../model/user.js');
 
-module.exports = {
+// Performs three total requests before throwing error
+axiosRetry(axios, { retries: 2, retryDelay: axiosRetry.exponentialDelay });
 
+module.exports = {
     // Retrieves Star Wars articles from New York Times API dated within last month
     articles: (req, res) => {
         let date = moment().subtract(30, 'days').format('YYYY-MM-DD');
